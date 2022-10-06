@@ -1,0 +1,2 @@
+VERSION=100.0
+URI_SCHEME=com.smallab.devscenario.open://
