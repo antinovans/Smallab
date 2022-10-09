@@ -271,9 +271,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  colorEvent:
-    m_PersistentCalls:
-      m_Calls: []
   emissionColorBegin: {r: 0.990566, g: 0.94835025, b: 0.3868814, a: 1}
   baseColorBegin: {r: 1, g: 0.95849514, b: 0.45660377, a: 1}
   emissionColorEnd: {r: 1, g: 0, b: 0.111730576, a: 1}
@@ -3810,7 +3807,6 @@ MonoBehaviour:
   topRight: {fileID: 1160860994}
   prefabs:
   - {fileID: 5000623780259755085, guid: 837b3a566e974234abece44cdcd0e981, type: 3}
-  - {fileID: 6755773270309899558, guid: 5e6f84a9560d11a4e88b9671e3714041, type: 3}
   maxNum: 10
   interval: 10
 --- !u!1001 &2039735975
@@ -4844,10 +4840,80 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899556, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899556, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 6755773270309899558, guid: 5e6f84a9560d11a4e88b9671e3714041,
         type: 3}
       propertyPath: m_Name
       value: Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].time
+      value: 0.3691257
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[2].time
+      value: 0.7725647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].value
+      value: 0.99723375
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[2].value
+      value: -0.31863165
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].inSlope
+      value: 0.024774779
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[2].inSlope
+      value: 0.044365976
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].outSlope
+      value: 0.024774779
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[2].inWeight
+      value: 0.050819635
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[2].outSlope
+      value: 0.044365976
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].outWeight
+      value: 0.34093833
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899559, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[2].outWeight
+      value: 0.5384674
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e6f84a9560d11a4e88b9671e3714041, type: 3}

@@ -14,23 +14,39 @@ public class CurvedMovement : MonoBehaviour
     private Vector3 _movingDir;
     void Start()
     {
+        interval += UnityEngine.Random.Range(-interval / 4, interval / 4);
         InitializePosition();
-        interval = 3.0f;
-        maxSpeed = 1.0f;
-        _timer = interval;
+        _timer = 0;
     }
 
     private void Update()
     {
+        Move();
+    }
+
+    /*    private void Move()
+        {
+            _timer += Time.deltaTime;
+            if (_timer > interval)
+            {
+                FindNextPos();
+                _movingDir = (_nextPos - transform.position).normalized;
+                _timer = 0f;
+            }
+            _speed = speedCurve.Evaluate(_timer) * maxSpeed;
+            gameObject.GetComponent<Rigidbody>().velocity = _speed * _movingDir;
+        }*/
+    private void Move()
+    {
         _timer += Time.deltaTime;
-        if(_timer > interval)
+        if (_timer > interval)
         {
             FindNextPos();
             _movingDir = (_nextPos - transform.position).normalized;
             _timer = 0f;
         }
-        _speed = speedCurve.Evaluate(_timer)* maxSpeed;
-        gameObject.GetComponent<Rigidbody>().velocity = _speed * _movingDir;
+        _speed = speedCurve.Evaluate(_timer) * maxSpeed;
+        gameObject.GetComponent<Rigidbody>().AddForce(_speed * _movingDir, ForceMode.Acceleration);
     }
 
     private void InitializePosition()

@@ -8,7 +8,6 @@ public class GateVFXController : MonoBehaviour
     public float MaxInterval;
     public float MinInterval;
     public AnimationCurve curve;
-    public UnityEvent colorEvent;
     public Color emissionColorBegin;
     public Color baseColorBegin;
     public Color emissionColorEnd;
@@ -55,11 +54,6 @@ public class GateVFXController : MonoBehaviour
     }
     void UpdateColor()
     {
-        if (Input.anyKeyDown && colorEvent != null)
-        {
-            //Begin the action
-            colorEvent.Invoke();
-        }
         timer += Time.deltaTime;
         timer %= interval;
         mat.SetColor("_EmissionColor", curEColor * curve.Evaluate(timer / interval) * lumin);

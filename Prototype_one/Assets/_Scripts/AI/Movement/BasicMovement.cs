@@ -21,7 +21,7 @@ public class BasicMovement : MonoBehaviour
     }
 
 
-    protected virtual IEnumerator MoveToNextPos()
+    protected IEnumerator MoveToNextPos()
     {
         while (true)
         {
@@ -35,7 +35,7 @@ public class BasicMovement : MonoBehaviour
         _nextPos = new Vector3(UnityEngine.Random.Range(NPCGenerator.minX, NPCGenerator.maxX)
                 , transform.position.y, UnityEngine.Random.Range(NPCGenerator.minX, NPCGenerator.maxX));
     }
-    protected virtual void Move()
+    protected void Move()
     {
         this.GetComponent<Rigidbody>().AddForce((_nextPos - transform.position).normalized * gameObject.GetComponent<Rigidbody>().mass * speed, ForceMode.Impulse);
     }
