@@ -35,14 +35,6 @@ public class NPCGenerator : MonoBehaviour
         minZ = bottomLeft.transform.position.z;
         maxZ = topRight.transform.position.z;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        var collisionObj = collision.gameObject;
-        if (collisionObj.CompareTag("NPC"))
-        {
-            Destroy(collisionObj);
-        }
-    }
     IEnumerator InstantiatePrefabs()
     {
         while (curNum <= maxNum)

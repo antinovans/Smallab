@@ -22,8 +22,6 @@ public class GateVFXController : MonoBehaviour
     private Material mat;
     private float timer;
     private float lumin;
-    private static Color BEGINNING_COLOR;
-    private static Color ENDING_COLOR;
     private static Color E_GRADIENT;
     private static Color B_GRADIENT;
     private static float I_GRADIENT;
@@ -31,15 +29,10 @@ public class GateVFXController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        initializeParameters();
-        mat = gameObject.GetComponent<Renderer>().material;
-        curEColor = emissionColorBegin;
-        curBColor = baseColorBegin;
-        colorEvent = new UnityEvent();
-        colorEvent.AddListener(ColorAction);
+        initializeVariables();
     }
 
-    private void initializeParameters()
+    private void initializeVariables()
     {
         interval = MaxInterval;
         lumin = 2.0f;
@@ -48,11 +41,19 @@ public class GateVFXController : MonoBehaviour
         prevColorLevel = 0;
         E_GRADIENT = (emissionColorEnd - emissionColorBegin) / gradientNum;
         B_GRADIENT = (baseColorEnd - baseColorBegin) / gradientNum;
-        I_GRADIENT = (MinInterval - MaxInterval) / gradientNum; 
+        I_GRADIENT = (MinInterval - MaxInterval) / gradientNum;
+        mat = gameObject.GetComponent<Renderer>().material;
+        curEColor = emissionColorBegin;
+        curBColor = baseColorBegin;
+        EventManager.current.onGateColorChange += GateColorResponse;
     }
 
     // Update is called once per frame
     void Update()
+    {
+        UpdateColor();
+    }
+    void UpdateColor()
     {
         if (Input.anyKeyDown && colorEvent != null)
         {
@@ -61,21 +62,20 @@ public class GateVFXController : MonoBehaviour
         }
         timer += Time.deltaTime;
         timer %= interval;
-        mat.SetColor("_EmissionColor", curEColor * curve.Evaluate(timer/interval) * lumin);
+        mat.SetColor("_EmissionColor", curEColor * curve.Evaluate(timer / interval) * lumin);
         mat.SetColor("_BaseColor", curBColor);
     }
-
-    void ColorAction()
+    void GateColorResponse(int input)
     {
         prevColorLevel = colorLevel;
-        colorLevel += 1;
+        colorLevel += input;
         colorLevel = Mathf.Clamp(colorLevel, 0, gradientNum);
-        if(colorLevel - prevColorLevel != 0) {
+        if (colorLevel - prevColorLevel != 0)
+        {
             curEColor += E_GRADIENT * (colorLevel - prevColorLevel);
             curBColor += B_GRADIENT * (colorLevel - prevColorLevel);
             interval += I_GRADIENT * (colorLevel - prevColorLevel);
             interval = Mathf.Clamp(interval, MinInterval, MaxInterval);
-            Debug.Log(curEColor);
         }
     }
 
