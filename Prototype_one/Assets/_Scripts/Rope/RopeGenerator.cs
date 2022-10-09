@@ -84,6 +84,7 @@ public class RopeGenerator : MonoBehaviour
         for(int i = 0; i < numOfComponents; i++)
         {
             _components[i] = Instantiate(componentPrefab);
+            _components[i].transform.parent = gameObject.transform;
             _components[i].transform.localScale *= scale;
             _components[i].transform.position = gameObject.transform.position + (i + 1) * (end.transform.position - gameObject.transform.position) / (numOfComponents + 1);
             AddConfigurableJoint(prevObject.GetComponent<Rigidbody>(), _components[i]);
