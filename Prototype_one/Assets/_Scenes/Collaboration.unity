@@ -272,10 +272,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   emissionColorBegin: {r: 0.990566, g: 0.94835025, b: 0.3868814, a: 1}
-  baseColorBegin: {r: 1, g: 0.95849514, b: 0.45660377, a: 1}
   emissionColorEnd: {r: 1, g: 0, b: 0.111730576, a: 1}
-  baseColorEnd: {r: 1, g: 0, b: 0.121212006, a: 1}
   gradientNum: 5
+  baseColorBegin: {r: 1, g: 0.95849514, b: 0.45660377, a: 1}
+  baseColorEnd: {r: 1, g: 0, b: 0.121212006, a: 1}
 --- !u!114 &40802638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2610,45 +2610,24 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  emissionColorBegin: {r: 0.9811321, g: 0.5266086, b: 0, a: 1}
-  baseColorBegin: {r: 1, g: 0.65757054, b: 0.13679248, a: 1}
+  emissionColorBegin: {r: 1, g: 0.8700566, b: 0.5424528, a: 1}
   emissionColorEnd: {r: 1, g: 0, b: 0, a: 1}
-  baseColorEnd: {r: 1, g: 0.11372549, b: 0.1273585, a: 1}
   gradientNum: 8
-  test: 0
   colorGradient:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0.0014038086
-      inSlope: 0.12870105
-      outSlope: 0.12870105
+      inSlope: 5.0752873
+      outSlope: 5.0752873
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.3363988
+      outWeight: 0.13862565
     - serializedVersion: 3
-      time: 0.05486893
-      value: 0.017440662
-      inSlope: 1.0796273
-      outSlope: 1.0796273
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.18075432
-      value: 0.33639166
-      inSlope: 1.3018794
-      outSlope: 1.3018794
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.33417377
-      value: 0.6372072
+      time: 0.16067967
+      value: 0.55948526
       inSlope: 1.5711049
       outSlope: 1.5711049
       tangentMode: 0
@@ -4899,6 +4878,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6755773270309899554, guid: 5e6f84a9560d11a4e88b9671e3714041,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8cd895e11a6ba64468ff24011ce64d42, type: 2}
     - target: {fileID: 6755773270309899556, guid: 5e6f84a9560d11a4e88b9671e3714041,
         type: 3}
       propertyPath: m_Drag

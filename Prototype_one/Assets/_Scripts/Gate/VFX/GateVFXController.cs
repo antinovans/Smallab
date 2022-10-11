@@ -5,6 +5,10 @@ using UnityEngine.Events;
 
 public class GateVFXController : VFXController
 {
+    public Color baseColorBegin;
+    public Color baseColorEnd;
+
+    protected static Color B_GRADIENT;
     protected int prevColorLevel;
     protected int colorLevel;
     // Start is called before the first frame update
@@ -16,6 +20,7 @@ public class GateVFXController : VFXController
     protected override void initializeVariables()
     {
         base.initializeVariables();
+        B_GRADIENT = (baseColorEnd - baseColorBegin) / gradientNum;
         prevColorLevel = 0;
         colorLevel = 0;
         curEColor = emissionColorBegin;
