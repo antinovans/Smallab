@@ -3,45 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GateVFXController : MonoBehaviour
+public class GateVFXController : VFXController
 {
-    public float MaxInterval;
-    public float MinInterval;
-    public AnimationCurve curve;
-    public Color emissionColorBegin;
-    public Color baseColorBegin;
-    public Color emissionColorEnd;
-    public Color baseColorEnd;
-    public int gradientNum;
-
-    private Color curEColor;
-    private Color curBColor;
-    private int colorLevel;
-    private int prevColorLevel;
-    private Material mat;
-    private float timer;
-    private float lumin;
-    private static Color E_GRADIENT;
-    private static Color B_GRADIENT;
-    private static float I_GRADIENT;
-    private float interval;
+    protected int prevColorLevel;
+    protected int colorLevel;
     // Start is called before the first frame update
     void Start()
     {
         initializeVariables();
     }
 
-    private void initializeVariables()
+    protected override void initializeVariables()
     {
-        interval = MaxInterval;
-        lumin = 2.0f;
-        timer = 0.0f;
-        colorLevel = 0;
+        base.initializeVariables();
         prevColorLevel = 0;
-        E_GRADIENT = (emissionColorEnd - emissionColorBegin) / gradientNum;
-        B_GRADIENT = (baseColorEnd - baseColorBegin) / gradientNum;
-        I_GRADIENT = (MinInterval - MaxInterval) / gradientNum;
-        mat = gameObject.GetComponent<Renderer>().material;
+        colorLevel = 0;
         curEColor = emissionColorBegin;
         curBColor = baseColorBegin;
         EventManager.current.onGateColorChange += GateColorResponse;

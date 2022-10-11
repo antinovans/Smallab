@@ -35,7 +35,7 @@ public class GateResponse : MonoBehaviour
 
             elapsed += Time.deltaTime;
 
-            yield return null;
+            yield return 0.1f;
         }
         isShaking = false;
         transform.position = originPos;

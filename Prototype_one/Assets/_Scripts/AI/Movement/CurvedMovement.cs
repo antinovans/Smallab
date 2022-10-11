@@ -51,7 +51,7 @@ public class CurvedMovement : MonoBehaviour
 
     private void InitializePosition()
     {
-        transform.position = new Vector3(transform.position.x, NPCGenerator.playerY, transform.position.y);
+        transform.position = new Vector3(transform.position.x, NPCGenerator.playerY, transform.position.z);
     }
     protected void FindNextPos()
     {

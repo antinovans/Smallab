@@ -13,8 +13,11 @@ public class ColliderArea : MonoBehaviour
         }
         if (collisionObj.CompareTag("Anger"))
         {
-            EventManager.current.GateColliderEnter();
-            EventManager.current.GateColorChange(collision.gameObject.GetComponent<EmotionAttribute>().GetSize());
+            if(collisionObj.GetComponent<AngryAttribute>().GetSize() > 1)
+            {
+                EventManager.current.GateColliderEnter();
+                EventManager.current.GateColorChange(collision.gameObject.GetComponent<EmotionAttribute>().GetSize());
+            }
             Destroy(collisionObj);
             return;
         }
