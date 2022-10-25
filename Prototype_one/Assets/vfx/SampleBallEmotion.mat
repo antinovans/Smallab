@@ -35,10 +35,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CellDensity: 17
+    - _CellDensity: 5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _TimeFactor: 10
+    - _Thickness: 1.5
+    - _TimeFactor: 7
     m_Colors:
     - _Color: {r: 110.49699, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

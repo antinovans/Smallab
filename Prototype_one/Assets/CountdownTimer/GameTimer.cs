@@ -34,7 +34,7 @@ public class GameTimer : MonoBehaviour {
 	private TextMesh timeRemainingTextMesh;
 
 	void Awake(){
-		timeRemainingTextMesh = GameObject.Find ("TimeRemainingText").GetComponent<TextMesh>();
+		/*timeRemainingTextMesh = GameObject.Find ("TimeRemainingText").GetComponent<TextMesh>();*/
 		
 		UpdateEnableGameTimersFromPlayerPrefs();
 		UpdateGameDurationFromPlayerPrefs();
@@ -48,7 +48,7 @@ public class GameTimer : MonoBehaviour {
 			PlayerPrefs.SetInt ("EnableGameTimers", enableGameTimers?1:0);
 		}
 		
-		timeRemainingTextMesh.GetComponent<Renderer>().enabled = enableGameTimers;
+		/*timeRemainingTextMesh.GetComponent<Renderer>().enabled = enableGameTimers;*/
 	}
 
 	// Use this for initialization
@@ -85,7 +85,7 @@ public class GameTimer : MonoBehaviour {
 		
 		countdownTime = 2;
 		currentTime = roundTime;
-		timeRemainingTextMesh.text = "Time: " + currentTime;
+/*		timeRemainingTextMesh.text = "Time: " + currentTime;*/
 
 		showingTimeExpiredDisplay = false;
 
@@ -204,7 +204,7 @@ public class GameTimer : MonoBehaviour {
 		yield return new WaitForEndOfFrame();
 		
 		currentTime = roundTime;
-		timeRemainingTextMesh.text = "Time: " + currentTime;
+		/*timeRemainingTextMesh.text = "Time: " + currentTime;*/
 		
 	}
 

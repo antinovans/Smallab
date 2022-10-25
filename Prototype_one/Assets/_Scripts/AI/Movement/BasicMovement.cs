@@ -37,6 +37,9 @@ public class BasicMovement : MonoBehaviour
     }
     protected void Move()
     {
-        this.GetComponent<Rigidbody>().AddForce((_nextPos - transform.position).normalized * gameObject.GetComponent<Rigidbody>().mass * speed, ForceMode.Impulse);
+        if (TestingController.begin)
+        {
+            this.GetComponent<Rigidbody>().AddForce((_nextPos - transform.position).normalized * gameObject.GetComponent<Rigidbody>().mass * speed, ForceMode.Impulse);
+        }
     }
 }

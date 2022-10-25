@@ -21,7 +21,10 @@ public class CurvedMovement : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        if (TestingController.begin)
+        {
+            Move();
+        }
     }
 
     /*    private void Move()
@@ -57,5 +60,23 @@ public class CurvedMovement : MonoBehaviour
     {
         _nextPos = new Vector3(UnityEngine.Random.Range(NPCGenerator.minX, NPCGenerator.maxX)
                 , transform.position.y, UnityEngine.Random.Range(NPCGenerator.minX, NPCGenerator.maxX));
+    }
+    public void SetInterval(float input)
+    {
+        this.interval = input;
+    }
+
+    public float GetInterval()
+    {
+        return interval;
+    }
+    public void SetSpeed(float input)
+    {
+        this.maxSpeed = input;
+    }
+
+    public float GetMaxSpeed()
+    {
+        return maxSpeed;
     }
 }

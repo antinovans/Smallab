@@ -127,7 +127,7 @@ public class ConfigFilePanelScript : MonoBehaviour {
 		}
 
 		gameDuration = PlayerPrefs.GetInt ("GameDuration");
-		gameDurationInput.text = gameDuration.ToString();
+/*		gameDurationInput.text = gameDuration.ToString();*/
 
 
 		if(PlayerPrefs.HasKey ("EnableGameTimers")){
