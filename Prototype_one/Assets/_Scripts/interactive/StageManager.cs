@@ -18,8 +18,9 @@ public class StageManager : MonoBehaviour
     public GameObject player2;
     public GameObject player3;
 
-    private int maxLotusNum;
-    private int lotusNum;
+    [Header("lotus setting")]
+    public int maxLotusNum;
+    public int lotusNum;
     private Vector3 player1Pos;
     private Vector3 player2Pos;
     private Vector3 player3Pos;
@@ -34,15 +35,17 @@ public class StageManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxLotusNum = 10;
-        lotusNum = 0;
         isStart = false;
-        StartCoroutine(LightUp());
     }
 
     // Update is called once per frame
     void Update()
     {
+        lotusNum = Lotus.num;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(LightUp());
+        }
         if(isStart)
         {
             StartCoroutine(InstantiateLotus());
@@ -59,15 +62,22 @@ public class StageManager : MonoBehaviour
             yield return null;
         }
         sceneLight.intensity = endIntensity;
-        isStart = true;
+        FindObjectOfType<SoundManager>().PlaySound("Background", true);
         spawner.SpawnLeaf(player1Pos);
         spawner.SpawnLeaf(player2Pos);
         spawner.SpawnLeaf(player3Pos);
+        StartCoroutine(ToggleStart());
+    }
+
+    IEnumerator ToggleStart()
+    {
+        yield return new WaitForSeconds(4f);
+        isStart = true;
     }
 
     IEnumerator InstantiateLotus()
     {
-        while(lotusNum < maxLotusNum)
+        while(Lotus.num < maxLotusNum)
         {
             Vector3 location = new Vector3(Random.Range(-1.2f, 1.2f), 0, Random.Range(-1.2f, 1.2f));
             spawner.SpawnLotus(location);

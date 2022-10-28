@@ -56,7 +56,7 @@ public class ScenarioPausePlayScript : MonoBehaviour {
 	
 	protected virtual void CheckForKeyboardCommands(){
 		// check for key events to toggle activity states.
-		Event e = Event.current;
+		/*Event e = Event.current;
 		
 		if (e.type == EventType.KeyDown && e.keyCode == KeyCode.Escape) // check for the escape button
 		{
@@ -73,7 +73,7 @@ public class ScenarioPausePlayScript : MonoBehaviour {
 				handlePause();
 			}
 			
-		}			
+		}	*/		
 	}
 	
 	public void handleExit(){
