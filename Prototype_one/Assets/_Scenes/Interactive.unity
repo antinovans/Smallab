@@ -2038,7 +2038,7 @@ MonoBehaviour:
   player1: {fileID: 1651252348}
   player2: {fileID: 159856448}
   player3: {fileID: 1117722452}
-  maxLotusNum: 3
+  maxLotusNum: 8
   lotusNum: 0
 --- !u!114 &1438360880
 MonoBehaviour:
@@ -2058,13 +2058,14 @@ MonoBehaviour:
   - {fileID: 6942737299552568136, guid: b71fb035eeff2d443910583fb0701962, type: 3}
   - {fileID: 5324198384622209961, guid: 7e7fdfbf10714604687826454748be6c, type: 3}
   lotus:
-  - {fileID: 5041867398600769431, guid: 907ea8baf7579584795eb973d53124ec, type: 3}
-  - {fileID: 4489403738515578428, guid: d74c2fab4fdbb784e8139020a788af19, type: 3}
-  - {fileID: 8098290083561657205, guid: bcb8e2948fb784d428cd3aea016488a4, type: 3}
-  - {fileID: 6574168224061478048, guid: 12b9873ebc867bc4781137fe46fe29c0, type: 3}
-  - {fileID: 2206668512393990744, guid: 576ade94493b51c4bbea71989cfadaca, type: 3}
+  - {fileID: 6523152350805036780, guid: 14bbcaad2180a654cbe4305b4609b0a4, type: 3}
+  - {fileID: 9209013035246135646, guid: d591d478c766a6349beebd81cb11fbaa, type: 3}
+  - {fileID: 5942633378506915530, guid: ebcc7c637e956ef42980977c48dca765, type: 3}
+  - {fileID: 6983558028249148079, guid: 3b7eeb960eac94b4294e6832b98a0281, type: 3}
+  - {fileID: 1866191165549326768, guid: 6eb9ddb0f2110904399444bd7d3241d7, type: 3}
+  - {fileID: 5769942472383708453, guid: eaad611cb48ad594994a13e1ef52ea72, type: 3}
   offset: {x: 0, y: -0.5, z: 0}
-  rotationDegree: 720
+  rotationDegree: 360
   showUpDuration: 2
 --- !u!1 &1514828472
 GameObject:
@@ -3072,9 +3073,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
+  - name: Background
+    clip: {fileID: 8300000, guid: d6a9801b2425cd948ac03a46af652983, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: lotus1
+    clip: {fileID: 8300000, guid: 0fa2d00bdfb9b41458c7a5f7c45cefc0, type: 3}
+    volume: 0.6
+    source: {fileID: 0}
+  - name: lotus2
+    clip: {fileID: 8300000, guid: 4ba21bd41dc05d846a807ed1730866f1, type: 3}
+    volume: 0.6
+    source: {fileID: 0}
+  - name: lotus3
+    clip: {fileID: 8300000, guid: 3b57f203f491fc344b132da219f49051, type: 3}
+    volume: 0.6
+    source: {fileID: 0}
+  - name: lotus4
+    clip: {fileID: 8300000, guid: f9ac51521c6bec843b22ae0294df4bda, type: 3}
+    volume: 0.6
+    source: {fileID: 0}
+  - name: lotus5
+    clip: {fileID: 8300000, guid: a6f5e4fbe49773542994f8b1fafafa8d, type: 3}
+    volume: 0.6
+    source: {fileID: 0}
 --- !u!1 &1894729242
 GameObject:
   m_ObjectHideFlags: 0

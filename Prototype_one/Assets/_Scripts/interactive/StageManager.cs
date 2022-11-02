@@ -27,7 +27,7 @@ public class StageManager : MonoBehaviour
 
     private Spawner spawner;
     private bool isStart;
-
+    private bool instantiating;
     private void Awake()
     {
         spawner = GetComponent<Spawner>();
@@ -36,19 +36,21 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         isStart = false;
+        instantiating = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        lotusNum = Lotus.num;
+        Debug.Log(Data.positions.Count);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(LightUp());
         }
         if(isStart)
         {
-            StartCoroutine(InstantiateLotus());
+            if (!instantiating)
+                StartCoroutine(InstantiateLotus());
         }
     }
 
@@ -66,6 +68,9 @@ public class StageManager : MonoBehaviour
         spawner.SpawnLeaf(player1Pos);
         spawner.SpawnLeaf(player2Pos);
         spawner.SpawnLeaf(player3Pos);
+        Data.AddPosition(new Vector2(player1Pos.x, player1Pos.z));
+        Data.AddPosition(new Vector2(player2Pos.x, player2Pos.z));
+        Data.AddPosition(new Vector2(player2Pos.x, player2Pos.z));
         StartCoroutine(ToggleStart());
     }
 
@@ -74,16 +79,29 @@ public class StageManager : MonoBehaviour
         yield return new WaitForSeconds(4f);
         isStart = true;
     }
-
     IEnumerator InstantiateLotus()
     {
-        while(Lotus.num < maxLotusNum)
+        instantiating = true;
+        while (Lotus.num < maxLotusNum)
         {
-            Vector3 location = new Vector3(Random.Range(-1.2f, 1.2f), 0, Random.Range(-1.2f, 1.2f));
+            /*bool shouldContinue = false;*/
+            Vector3 location = new Vector3(Random.Range(-1.5f, 1.5f), 0, Random.Range(-1.5f, 1.5f));
+/*            foreach (var d in Data.positions)
+            {
+                if (Vector2.Distance(location, d) < 0.5f)
+                {
+                    shouldContinue = true;
+                    break;
+                }
+            }
+            if (shouldContinue)
+                continue;*/
             spawner.SpawnLotus(location);
-            lotusNum++;
-            yield return new WaitForSeconds(10f);
+/*            yield return new WaitForSeconds(10f);
+            yield return null;*/
+            yield return new WaitForSeconds(0.5f);
         }
+        instantiating = false;
     }
     public void UpdatePosition()
     {

@@ -10,15 +10,15 @@ public class TestingController : MonoBehaviour
     {
         begin = false;
     }
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        StartCoroutine(CountDown());
+        SoundManager.instance.PlaySound("Background", true);
     }
-    IEnumerator CountDown()
+    // Start is called before the first frame update
+    private void Update()
     {
-        yield return new WaitForSeconds(timer);
-        begin = true;
+        if (Input.GetKeyDown(KeyCode.Space))
+            begin = true;
     }
     // Update is called once per frame
 }

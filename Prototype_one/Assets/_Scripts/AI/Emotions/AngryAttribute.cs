@@ -32,6 +32,7 @@ public class AngryAttribute : EmotionAttribute
         var collisionObj = collision.gameObject;
         if (collisionObj.CompareTag("Joy") && isSplitable)
         {
+            SoundManager.instance.PlaySound("Positive_Collision", false);
             Split(collisionObj.GetComponent<Rigidbody>().velocity, gameObject.GetComponent<Rigidbody>().velocity
                 , collisionObj.GetComponent<Rigidbody>().mass, gameObject.GetComponent<Rigidbody>().mass);
             Destroy(collisionObj);

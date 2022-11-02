@@ -608,6 +608,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271581774}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &305408274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 305408276}
+  - component: {fileID: 305408275}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &305408275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305408274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab54d0f01ffe8c46bf21a17fdb2a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Background
+    clip: {fileID: 8300000, guid: ed31cc3ffb661db4080a026a50c39182, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Positive_Collision
+    clip: {fileID: 8300000, guid: f7a7ebf7b7e2efd42ab3bf1b74079af7, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Positive_Consume
+    clip: {fileID: 8300000, guid: 12588bc4d41c2a2458dcf054569cf5bc, type: 3}
+    volume: 1
+    source: {fileID: 0}
+--- !u!4 &305408276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305408274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.10163159, y: -0.490465, z: 0.094786964}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &381354064
 GameObject:
   m_ObjectHideFlags: 0
@@ -4053,7 +4110,7 @@ MonoBehaviour:
   prefabs:
   - {fileID: 5000623780259755085, guid: 837b3a566e974234abece44cdcd0e981, type: 3}
   maxNum: 10
-  interval: 10
+  interval: 5
 --- !u!1001 &2039735975
 PrefabInstance:
   m_ObjectHideFlags: 0

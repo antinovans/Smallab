@@ -9,6 +9,7 @@ public class ColliderArea : MonoBehaviour
         var collisionObj = collision.gameObject;
         if (!collisionObj.CompareTag("Joy") && !collisionObj.CompareTag("Anger"))
         {
+            SoundManager.instance.PlaySound("Positive_Consume", false);
             return;
         }
         if (collisionObj.CompareTag("Anger"))
