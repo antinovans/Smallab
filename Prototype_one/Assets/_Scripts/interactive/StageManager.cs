@@ -65,6 +65,9 @@ public class StageManager : MonoBehaviour
         }
         sceneLight.intensity = endIntensity;
         FindObjectOfType<SoundManager>().PlaySound("Background", true);
+        player1Pos = player1.transform.position;
+        player2Pos = player2.transform.position;
+        player2Pos = player3.transform.position;
         spawner.SpawnLeaf(player1Pos);
         spawner.SpawnLeaf(player2Pos);
         spawner.SpawnLeaf(player3Pos);
