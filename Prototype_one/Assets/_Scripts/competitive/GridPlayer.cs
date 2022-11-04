@@ -8,9 +8,11 @@ public class GridPlayer : MonoBehaviour
     public Player id;
     private int gridsAdded = 0;
     private Dictionary<int, Grid> memory;
+    private Grid lastGrid;
     // Start is called before the first frame update
     void Start()
     {
+        lastGrid = null;
         memory = new Dictionary<int, Grid>();
     }
 
@@ -27,13 +29,23 @@ public class GridPlayer : MonoBehaviour
 
     public void AddGridToMemo(Grid grid)
     {
+        if (!checkAddValid(grid))
+            EmptyMemo();
+        this.lastGrid = grid;
         gridsAdded++;
         grid.SetSequence(this.gridsAdded);
         grid.SetPlayer(this.id);
         grid.SetPlayerScript(this);
         memory.Add(gridsAdded, grid);
     }
-
+    private bool checkAddValid(Grid grid)
+    {
+        if (lastGrid == null)
+            return true;
+        if (Mathf.Abs(lastGrid.GetX() - grid.GetX()) + Mathf.Abs(lastGrid.GetY() - grid.GetY()) > 1)
+            return false;
+        return true;
+    }
     public void EmptyMemo()
     {
         foreach(var g in memory)

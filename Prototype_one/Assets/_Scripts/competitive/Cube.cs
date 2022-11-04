@@ -11,14 +11,21 @@ public class Cube : MonoBehaviour
     public static Color NULL = Color.white;
     public static float RANDOM_LOWER = 1f;
     public static float RANDOM_UPPER = 1.2f;
+    public static Vector3 offSet = new Vector3(0, 0.2f, 0);
 
-    private IEnumerator co;
+    private IEnumerator logicCo;
+    private IEnumerator translateCo;
     private Material mat;
+    private Vector3 initPos;
+    private Vector3 endPos;
+    private float duration;
     /*private Renderer r;*/
     // Start is called before the first frame update
     void Start()
     {
         mat = gameObject.GetComponent<Renderer>().material;
+        initPos = gameObject.transform.position;
+        endPos = initPos + offSet;
     }
 
     // Update is called once per frame
@@ -37,8 +44,12 @@ public class Cube : MonoBehaviour
         GridPlayer player = other.GetComponent<GridPlayer>();
         if(player != null)
         {
-            co = CountDown(player);
-            StartCoroutine(co);
+            //change date inside grid, gridplayer
+            logicCo = CountDown(player);
+            StartCoroutine(logicCo);
+            //handle translation effect
+            translateCo = MoveUp();
+            StartCoroutine(translateCo);
         }
     }
 
@@ -47,12 +58,15 @@ public class Cube : MonoBehaviour
         GridPlayer player = other.GetComponent<GridPlayer>();
         if (player != null)
         {
-            StopCoroutine(co);
+            StopCoroutine(logicCo);
+            StopCoroutine(translateCo);
+            translateCo = MoveDown();
+            StartCoroutine(translateCo);
         }
     }
     IEnumerator CountDown(GridPlayer player)
     {
-        float duration = Random.Range(RANDOM_LOWER, RANDOM_UPPER);
+        duration = Random.Range(RANDOM_LOWER, RANDOM_UPPER);
         float timer = 0.0f;
         while(timer <= duration)
         {
@@ -60,6 +74,33 @@ public class Cube : MonoBehaviour
             yield return null;
         }
         HandleGridUpdate(player);
+        translateCo = MoveDown();
+        StartCoroutine(translateCo);
+    }
+
+    IEnumerator MoveUp()
+    {
+        float timer = 0.0f;
+        while(timer <= duration)
+        {
+            transform.position = Vector3.Lerp(initPos, endPos, timer / duration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = endPos;
+    }
+
+    IEnumerator MoveDown()
+    {
+        float timer = 0.0f;
+        Vector3 beginPos = transform.position;
+        while (timer <= 0.2f)
+        {
+            transform.position = Vector3.Lerp(beginPos, initPos, timer / 0.2f);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = initPos;
     }
 
     private void HandleGridUpdate(GridPlayer player)
