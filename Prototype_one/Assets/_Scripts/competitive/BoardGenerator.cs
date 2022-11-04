@@ -10,15 +10,24 @@ public class BoardGenerator : MonoBehaviour
     public Vector3 initPos;
     public float gap;
 
-    public static float X_MIN = -1.2f;
-    public static float X_MAX = 1.2f;
-    public static float Y_MIN = -1.2f;
-    public static float Y_MAX = 1.2f;
+    public float X_MIN;
+    public float X_MAX;
+/*    public float Y_MIN;
+    public float Y_MAX;*/
     private float gridSize;
+    private bool isInstantiated = false;
     // Start is called before the first frame update
     void Start()
     {
-        InitializeBoard();
+        /*InitializeBoard();*/
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && !isInstantiated)
+        {
+            InitializeBoard();
+            isInstantiated = true;
+        }
     }
 
     private void InitializeBoard()

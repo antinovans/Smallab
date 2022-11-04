@@ -13,12 +13,13 @@ public class Cube : MonoBehaviour
     public static float RANDOM_UPPER = 1.2f;
     public static Vector3 offSet = new Vector3(0, 0.2f, 0);
 
+    public float duration;
+
     private IEnumerator logicCo;
     private IEnumerator translateCo;
     private Material mat;
     private Vector3 initPos;
     private Vector3 endPos;
-    private float duration;
     /*private Renderer r;*/
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,7 @@ public class Cube : MonoBehaviour
             //handle translation effect
             translateCo = MoveUp();
             StartCoroutine(translateCo);
+            //handle UI
         }
     }
 
