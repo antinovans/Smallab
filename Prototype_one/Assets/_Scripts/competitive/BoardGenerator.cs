@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoardGenerator : MonoBehaviour
 {
-    private Grid[,] board;
+    private static Grid[,] board;
     public int numOfGrid;
     public GameObject cube;
     public Vector3 initPos;
@@ -16,6 +16,7 @@ public class BoardGenerator : MonoBehaviour
     public float Y_MAX;*/
     private float gridSize;
     private bool isInstantiated = false;
+    public static bool isEnd = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,50 @@ public class BoardGenerator : MonoBehaviour
             InitializeBoard();
             isInstantiated = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isInstantiated)
+        {
+            isEnd = true;
+        }
+    }
+
+    public static List<Player> CalculateWinner()
+    {
+        int blue = 0, yellow = 0, green = 0;
+
+        for(int i = 0; i < board.Length; i++)
+        {
+            for(int j = 0; j < board.Length; j++)
+            {
+                if(board[i,j].GetPlayer() == Player.PLAYER_BLUE)
+                {
+                    blue++;
+                }
+                if (board[i, j].GetPlayer() == Player.PLAYER_GREEN)
+                {
+                    green++;
+                }
+                if (board[i, j].GetPlayer() == Player.PLAYER_YELLOW)
+                {
+                    yellow++;
+                }
+            }
+        }
+        List<Player> ret = new List<Player>();
+        int max = Mathf.Max(blue, Mathf.Max(yellow, green));
+        if(max == blue)
+        {
+            ret.Add(Player.PLAYER_BLUE);
+        }
+        if (max == green)
+        {
+            ret.Add(Player.PLAYER_GREEN);
+        }
+        if (max == yellow)
+        {
+            ret.Add(Player.PLAYER_YELLOW);
+        }
+        return ret;
     }
 
     private void InitializeBoard()

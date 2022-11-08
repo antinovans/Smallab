@@ -35,7 +35,10 @@ public class Cube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(BoardGenerator.isEnd)
+        {
+
+        }
     }
     
     public void SetParent(Grid grid)
@@ -55,7 +58,7 @@ public class Cube : MonoBehaviour
             translateCo = MoveUp();
             StartCoroutine(translateCo);
             //handle UI
-            uimanager.InstantiateUI(initPos, duration);
+            /*uimanager.InstantiateUI(initPos, duration);*/
         }
     }
 
