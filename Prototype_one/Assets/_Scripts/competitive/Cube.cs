@@ -20,6 +20,8 @@ public class Cube : MonoBehaviour
     private Material mat;
     private Vector3 initPos;
     private Vector3 endPos;
+    private static LoadingUIManager uimanager;
+
     /*private Renderer r;*/
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,7 @@ public class Cube : MonoBehaviour
         mat = gameObject.GetComponent<Renderer>().material;
         initPos = gameObject.transform.position;
         endPos = initPos + offSet;
+        uimanager = FindObjectOfType<LoadingUIManager>();
     }
 
     // Update is called once per frame
@@ -52,6 +55,7 @@ public class Cube : MonoBehaviour
             translateCo = MoveUp();
             StartCoroutine(translateCo);
             //handle UI
+            uimanager.InstantiateUI(initPos, duration);
         }
     }
 
@@ -62,6 +66,7 @@ public class Cube : MonoBehaviour
         {
             StopCoroutine(logicCo);
             StopCoroutine(translateCo);
+            //handle translation effect
             translateCo = MoveDown();
             StartCoroutine(translateCo);
         }

@@ -2058,12 +2058,16 @@ MonoBehaviour:
   - {fileID: 6942737299552568136, guid: b71fb035eeff2d443910583fb0701962, type: 3}
   - {fileID: 5324198384622209961, guid: 7e7fdfbf10714604687826454748be6c, type: 3}
   lotus:
-  - {fileID: 6523152350805036780, guid: 14bbcaad2180a654cbe4305b4609b0a4, type: 3}
-  - {fileID: 9209013035246135646, guid: d591d478c766a6349beebd81cb11fbaa, type: 3}
-  - {fileID: 5942633378506915530, guid: ebcc7c637e956ef42980977c48dca765, type: 3}
-  - {fileID: 6983558028249148079, guid: 3b7eeb960eac94b4294e6832b98a0281, type: 3}
-  - {fileID: 1866191165549326768, guid: 6eb9ddb0f2110904399444bd7d3241d7, type: 3}
   - {fileID: 5769942472383708453, guid: eaad611cb48ad594994a13e1ef52ea72, type: 3}
+  - {fileID: 9209013035246135646, guid: d591d478c766a6349beebd81cb11fbaa, type: 3}
+  - {fileID: 6523152350805036780, guid: 14bbcaad2180a654cbe4305b4609b0a4, type: 3}
+  - {fileID: 5942633378506915530, guid: ebcc7c637e956ef42980977c48dca765, type: 3}
+  - {fileID: 1866191165549326768, guid: 6eb9ddb0f2110904399444bd7d3241d7, type: 3}
+  - {fileID: 6983558028249148079, guid: 3b7eeb960eac94b4294e6832b98a0281, type: 3}
+  - {fileID: 5769942472383708453, guid: e0a9a832f3a06d146b64d20f4cb831db, type: 3}
+  - {fileID: 5769942472383708453, guid: e764cbfc26cd28a49964ff25aa974e77, type: 3}
+  - {fileID: 5769942472383708453, guid: 6c07f6dd0a4e953438d93906f7052a0d, type: 3}
+  - {fileID: 5942633378506915530, guid: 8e8b6f6c4e19d32479bf640cac4df2e2, type: 3}
   offset: {x: 0, y: -0.5, z: 0}
   rotationDegree: 360
   showUpDuration: 2

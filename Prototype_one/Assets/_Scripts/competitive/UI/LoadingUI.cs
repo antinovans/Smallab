@@ -10,22 +10,27 @@ public class LoadingUI : MonoBehaviour
     [SerializeField]
     Image circleImageFill;
 
+    private IEnumerator co;
+
     private void Awake()
     {
         circleImageFill = transform.GetChild(0).GetComponent<Image>();
         fxHolder = transform.GetChild(1).GetComponent<RectTransform>();
     }
-    private void Start()
-    {
-        StartLoading(1);
-    }
     public void StartLoading(float time)
     {
-        StartCoroutine(Load(time));
+        co = Load(time);
+        StartCoroutine(co);
     }
 
-    IEnumerator Load(float time)
+    public IEnumerator Load(float time)
     {
+        if (circleImageFill == null)
+            Debug.Log("null");
+        else
+        {
+            Debug.Log("not null");
+        }
         float timer = 0f;
         while(timer <= time)
         {
