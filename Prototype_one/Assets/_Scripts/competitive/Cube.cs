@@ -21,11 +21,13 @@ public class Cube : MonoBehaviour
     private Vector3 initPos;
     private Vector3 endPos;
     private static LoadingUIManager uimanager;
-
+    //temp
+    private bool isEnd;
     /*private Renderer r;*/
     // Start is called before the first frame update
     void Start()
     {
+        isEnd = false;
         mat = gameObject.GetComponent<Renderer>().material;
         initPos = gameObject.transform.position;
         endPos = initPos + offSet;
@@ -35,9 +37,23 @@ public class Cube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(BoardGenerator.isEnd)
+        if(BoardGenerator.isEnd && !isEnd)
         {
-
+            isEnd = true;
+            switch(BoardGenerator.CalculateWinner())
+            {
+                case Player.PLAYER_BLUE:
+                    SetColor(BLUE);
+                    break;
+                case Player.PLAYER_GREEN:
+                    SetColor(GREEN);
+                    break;
+                case Player.PLAYER_YELLOW:
+                    SetColor(YELLOW);
+                    break;
+                default:
+                    break;
+            }
         }
     }
     

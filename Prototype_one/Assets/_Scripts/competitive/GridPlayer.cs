@@ -17,17 +17,10 @@ public class GridPlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+/*    void Update()
     {
-        if(BoardGenerator.isEnd)
-        {
-/*            Color c;
-            foreach(var p in BoardGenerator.CalculateWinner())
-            {
-                c +=
-            }*/
-        }
-    }
+
+    }*/
 
     public Player GetId()
     {

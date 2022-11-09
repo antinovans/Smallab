@@ -24,25 +24,25 @@ public class BoardGenerator : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && !isInstantiated)
-        {
-            InitializeBoard();
-            isInstantiated = true;
-        }
-
+        //temp get winner function
         if (Input.GetKeyDown(KeyCode.Space) && isInstantiated)
         {
             isEnd = true;
         }
+        if (Input.GetKeyDown(KeyCode.Space) && !isInstantiated)
+        {
+            InitializeBoard();
+            isInstantiated = true;
+        }
     }
 
-    public static List<Player> CalculateWinner()
+    public static Player CalculateWinner()
     {
         int blue = 0, yellow = 0, green = 0;
 
-        for(int i = 0; i < board.Length; i++)
+        for(int i = 0; i < board.GetLength(0); i++)
         {
-            for(int j = 0; j < board.Length; j++)
+            for(int j = 0; j < board.GetLength(1); j++)
             {
                 if(board[i,j].GetPlayer() == Player.PLAYER_BLUE)
                 {
@@ -58,19 +58,19 @@ public class BoardGenerator : MonoBehaviour
                 }
             }
         }
-        List<Player> ret = new List<Player>();
+        Player ret = Player.PLAYER_NULL;
         int max = Mathf.Max(blue, Mathf.Max(yellow, green));
         if(max == blue)
         {
-            ret.Add(Player.PLAYER_BLUE);
+            ret = Player.PLAYER_BLUE;
         }
         if (max == green)
         {
-            ret.Add(Player.PLAYER_GREEN);
+            ret = Player.PLAYER_GREEN;
         }
         if (max == yellow)
         {
-            ret.Add(Player.PLAYER_YELLOW);
+            ret = Player.PLAYER_YELLOW;
         }
         return ret;
     }
