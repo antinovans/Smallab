@@ -89,6 +89,7 @@ public class Cube : MonoBehaviour
             translateCo = MoveDown();
             StartCoroutine(translateCo);
         }
+        LoadingUIManager.instance.RemoveFromMemo(key);
     }
     IEnumerator CountDown(GridPlayer player)
     {
