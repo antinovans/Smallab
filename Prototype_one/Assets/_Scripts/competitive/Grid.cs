@@ -20,7 +20,7 @@ public class Grid
     private Vector3 worldPos;
     private int sequence;
     private GridPlayer playerScript;
-    private Cube obj;
+    private Cube cube;
 
     public Grid(int x, int y, Vector3 initPos, float gridSize, Player player)
     {
@@ -93,12 +93,15 @@ public class Grid
     {
         this.playerScript = ps;
     }
-    public void SetObj(Cube obj)
+    public void SetCube(Cube obj)
     {
-        this.obj = obj;
+        this.cube = obj;
     }
     public Cube GetCube()
     {
-        return this.obj;
+        return this.cube;
     }
+
+
+
 }

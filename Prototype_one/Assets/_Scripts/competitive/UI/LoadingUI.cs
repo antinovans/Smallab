@@ -11,11 +11,14 @@ public class LoadingUI : MonoBehaviour
     Image circleImageFill;
 
     private IEnumerator co;
-
+    private Quaternion initRotation;
+    private float initFillAmount;
     private void Awake()
     {
         circleImageFill = transform.GetChild(0).GetComponent<Image>();
         fxHolder = transform.GetChild(1).GetComponent<RectTransform>();
+        initFillAmount = circleImageFill.fillAmount;
+        initRotation = fxHolder.transform.rotation;
     }
     public void StartLoading(float time)
     {
@@ -25,12 +28,6 @@ public class LoadingUI : MonoBehaviour
 
     public IEnumerator Load(float time)
     {
-        if (circleImageFill == null)
-            Debug.Log("null");
-        else
-        {
-            Debug.Log("not null");
-        }
         float timer = 0f;
         while(timer <= time)
         {
@@ -40,6 +37,13 @@ public class LoadingUI : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        circleImageFill.fillAmount = initFillAmount;
+        fxHolder.rotation = initRotation;
+        LoadingUIManager.instance.AddToPool(gameObject);
     }
 }

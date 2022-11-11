@@ -9,18 +9,19 @@ public class Cube : MonoBehaviour
     public static Color GREEN = Color.green;
     public static Color BLUE = Color.blue;
     public static Color NULL = Color.white;
-    public static float RANDOM_LOWER = 1f;
-    public static float RANDOM_UPPER = 1.2f;
+    public static float RANDOM_LOWER = 0.5f;
+    public static float RANDOM_UPPER = 0.6f;
     public static Vector3 offSet = new Vector3(0, 0.2f, 0);
 
     public float duration;
 
+    private int x;
+    private int y;
     private IEnumerator logicCo;
     private IEnumerator translateCo;
     private Material mat;
     private Vector3 initPos;
     private Vector3 endPos;
-    private static LoadingUIManager uimanager;
     //temp
     private bool isEnd;
     /*private Renderer r;*/
@@ -31,10 +32,10 @@ public class Cube : MonoBehaviour
         mat = gameObject.GetComponent<Renderer>().material;
         initPos = gameObject.transform.position;
         endPos = initPos + offSet;
-        uimanager = FindObjectOfType<LoadingUIManager>();
     }
 
     // Update is called once per frame
+    // calculate winner
     void Update()
     {
         if(BoardGenerator.isEnd && !isEnd)
@@ -57,10 +58,6 @@ public class Cube : MonoBehaviour
         }
     }
     
-    public void SetParent(Grid grid)
-    {
-        this.parent = grid;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -75,6 +72,7 @@ public class Cube : MonoBehaviour
             StartCoroutine(translateCo);
             //handle UI
             /*uimanager.InstantiateUI(initPos, duration);*/
+            LoadingUIManager.instance.LoadUI(initPos, duration);
         }
     }
 
@@ -169,4 +167,19 @@ public class Cube : MonoBehaviour
         mat.SetColor("_EmissionColor", c);
         mat.SetColor("_BaseColor", c);
     }
+    public void SetParentGrid(Grid grid)
+    {
+        this.parent = grid;
+        this.x = grid.GetX();
+        this.y = grid.GetY();
+    }
+    public int GetX()
+    {
+        return this.x;
+    }
+    public int GetY()
+    {
+        return this.y;
+    }
+
 }

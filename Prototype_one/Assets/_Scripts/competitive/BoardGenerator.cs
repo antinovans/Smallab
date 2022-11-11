@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoardGenerator : MonoBehaviour
 {
-    private static Grid[,] board;
+    [Header("Board Setting")]
     public int numOfGrid;
     public GameObject cube;
     public Vector3 initPos;
@@ -12,8 +12,11 @@ public class BoardGenerator : MonoBehaviour
 
     public float X_MIN;
     public float X_MAX;
-/*    public float Y_MIN;
-    public float Y_MAX;*/
+    /*    public float Y_MIN;
+        public float Y_MAX;*/
+    //memory
+    private static Grid[,] board;
+    private static Cube[,] cubes;
     private float gridSize;
     private bool isInstantiated = false;
     public static bool isEnd = false;
@@ -79,37 +82,43 @@ public class BoardGenerator : MonoBehaviour
     {
         gridSize = (X_MAX - X_MIN) / numOfGrid;
         board = new Grid[numOfGrid, numOfGrid];
+        cubes = new Cube[numOfGrid, numOfGrid];
         for (int i = 0; i < numOfGrid; i++)
         {
             for (int j = 0; j < numOfGrid; j++)
             {
+                //calculating grid position
                 Vector3 offset = new Vector3(i * (gridSize + gap), 0, -
                     j * (gridSize + gap));
                 board[i, j] = new Grid(i, j, initPos + offset, gridSize, Player.PLAYER_NULL);
-
+                
+                //instantiate cube and configure cube's position
                 GameObject obj = Instantiate(cube);
                 obj.name = i + "," + j;
                 Cube instance = obj.GetComponent<Cube>();
                 if(instance != null)
                 {
-                    instance.SetParent(board[i, j]);
+                    instance.SetParentGrid(board[i, j]);
                 }
-                obj.transform.SetParent(gameObject.transform);
-                board[i, j].SetObj(obj.GetComponent<Cube>());
+
                 //update transform
-                SetObjPos(obj, board[i, j].GetWorldPos());
-                SetObjSize(obj, gridSize);
+                obj.transform.SetParent(gameObject.transform);
+                SetCubePos(obj, board[i, j].GetWorldPos());
+                SetCubeSize(obj, gridSize);
+                //update Cube.cs
+                board[i, j].SetCube(instance);
+                cubes[i, j] = instance;
             }
         }
     }
 
     // Update is called once per frame
 
-    public void SetObjSize(GameObject obj, float size)
+    public void SetCubeSize(GameObject obj, float size)
     {
         obj.transform.localScale = new Vector3(size, size, size);
     }
-    public void SetObjPos(GameObject obj, Vector3 pos)
+    public void SetCubePos(GameObject obj, Vector3 pos)
     {
         obj.transform.position = pos;
     }
