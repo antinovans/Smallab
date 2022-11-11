@@ -9,8 +9,8 @@ public class Cube : MonoBehaviour
     public static Color GREEN = Color.green;
     public static Color BLUE = Color.blue;
     public static Color NULL = Color.white;
-    public static float RANDOM_LOWER = 0.5f;
-    public static float RANDOM_UPPER = 0.6f;
+    public static float RANDOM_LOWER = 0.8f;
+    public static float RANDOM_UPPER = 0.1f;
     public static Vector3 offSet = new Vector3(0, 0.2f, 0);
 
     public float duration;
@@ -22,6 +22,7 @@ public class Cube : MonoBehaviour
     private Material mat;
     private Vector3 initPos;
     private Vector3 endPos;
+    private System.Tuple<int, int> key;
     //temp
     private bool isEnd;
     /*private Renderer r;*/
@@ -72,7 +73,8 @@ public class Cube : MonoBehaviour
             StartCoroutine(translateCo);
             //handle UI
             /*uimanager.InstantiateUI(initPos, duration);*/
-            LoadingUIManager.instance.LoadUI(initPos, duration);
+            key = System.Tuple.Create(x,y);
+            LoadingUIManager.instance.LoadUI(key, initPos, duration);
         }
     }
 

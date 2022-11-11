@@ -17,7 +17,7 @@ public class LoadingUIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        /*if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
             instance = this;
@@ -25,7 +25,8 @@ public class LoadingUIManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
+        }*/
+        instance = this;
         cam = Camera.main;
         uiPool = new Stack<GameObject>();
         memory = new Dictionary<System.Tuple<int, int>, LoadingUI>();
@@ -37,7 +38,7 @@ public class LoadingUIManager : MonoBehaviour
         uiPool = new Stack<GameObject>();
         memory = new Dictionary<System.Tuple<int, int>, LoadingUI>();*/
     }
-    public void LoadUI(Vector3 position, float time)
+    public void LoadUI(System.Tuple<int, int> key, Vector3 position, float time)
     {
         if (uiPool.Count == 0)
             ExpendStack(2);
@@ -50,7 +51,15 @@ public class LoadingUIManager : MonoBehaviour
 
         instance.transform.position = pos;
         var script = instance.GetComponent<LoadingUI>();
+        script.setKey(key);
+        memory.Add(key, script);
         script.StartLoading(time);
+    }
+
+    public void StopLoadingUI(System.Tuple<int, int> key)
+    {
+        if (memory.ContainsKey(key))
+            memory[key].StopLoading();
     }
 
     public void ExpendStack(int num)
@@ -63,8 +72,14 @@ public class LoadingUIManager : MonoBehaviour
             uiPool.Push(instance);
         }
     }
+
     public void AddToPool(GameObject obj)
     {
         uiPool.Push(obj);
+    }
+
+    public void RemoveFromMemo(System.Tuple<int, int> key)
+    {
+        this.memory.Remove(key);
     }
 }

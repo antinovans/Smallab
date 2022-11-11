@@ -13,6 +13,7 @@ public class LoadingUI : MonoBehaviour
     private IEnumerator co;
     private Quaternion initRotation;
     private float initFillAmount;
+    private System.Tuple<int, int> key;
     private void Awake()
     {
         circleImageFill = transform.GetChild(0).GetComponent<Image>();
@@ -24,6 +25,12 @@ public class LoadingUI : MonoBehaviour
     {
         co = Load(time);
         StartCoroutine(co);
+    }
+
+    public void StopLoading()
+    {
+        StopCoroutine(co);
+        gameObject.SetActive(false);
     }
 
     public IEnumerator Load(float time)
@@ -45,5 +52,10 @@ public class LoadingUI : MonoBehaviour
         circleImageFill.fillAmount = initFillAmount;
         fxHolder.rotation = initRotation;
         LoadingUIManager.instance.AddToPool(gameObject);
+        LoadingUIManager.instance.RemoveFromMemo(this.key);
+    }
+    public void setKey(System.Tuple<int, int> key)
+    {
+        this.key = key;
     }
 }
