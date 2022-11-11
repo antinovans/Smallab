@@ -141,8 +141,10 @@ public class Cube : MonoBehaviour
         //step to a grid that explored before
         if (player.GetId() == this.parent.GetPlayer())
         {
-            if (this.parent.GetPlayerScript() != null)
-                this.parent.GetPlayerScript().DeleteUpperMemoByGrid(this.parent);
+            /*if (this.parent.GetPlayerScript() != null)
+                this.parent.GetPlayerScript().DeleteUpperMemoByGrid(this.parent);*/
+            this.parent.GetPlayerScript().ResetGridInMemo(this.parent);
+            return;
         }
         //manipulating grid color
         Color c = FindColor(player);

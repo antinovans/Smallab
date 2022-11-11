@@ -59,6 +59,17 @@ public class GridPlayer : MonoBehaviour
         gridsAdded = 0;
     }
 
+    public void ResetGridInMemo(Grid grid)
+    {
+        foreach (var m in memory)
+        {
+            if (m.Value == grid)
+            {
+                memory.Remove(m.Key);
+                AddGridToMemo(grid);
+            }
+        }
+    }
     public void DeleteLowerMemoByGrid(Grid grid)
     {
         int sequence = grid.GetSequence();
