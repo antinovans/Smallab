@@ -40,6 +40,8 @@ public class LoadingUIManager : MonoBehaviour
     }
     public void LoadUI(System.Tuple<int, int> key, Vector3 position, float time)
     {
+        if (memory.ContainsKey(key))
+            return;
         if (uiPool.Count == 0)
             ExpendStack(2);
         var instance = uiPool.Pop();

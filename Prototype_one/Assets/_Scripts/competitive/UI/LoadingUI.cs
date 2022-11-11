@@ -52,7 +52,8 @@ public class LoadingUI : MonoBehaviour
         circleImageFill.fillAmount = initFillAmount;
         fxHolder.rotation = initRotation;
         LoadingUIManager.instance.AddToPool(gameObject);
-        LoadingUIManager.instance.RemoveFromMemo(this.key);
+        if(this.key != null)
+            LoadingUIManager.instance.RemoveFromMemo(this.key);
     }
     public void setKey(System.Tuple<int, int> key)
     {
