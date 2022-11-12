@@ -127,6 +127,26 @@ public class Grid
             temp = nextGrid;
         }
     }
+    public void DelinkWholeGrids()
+    {
+        Grid highest = this;
+        while(highest.higher != null)
+        {
+            highest = highest.higher;
+        }
+        while(highest != null)
+        {
+            Debug.Log("Disconnect!");
+            Grid left = highest.lower;
+            if (left != null)
+                left.higher = null;
+            highest.lower = null;
+            highest.SetPlayer(Player.PLAYER_NULL);
+            highest.SetOccupied(true);
+            highest.GetCube().SetColor(Cube.NULL);
+            highest = left;
+        }
+    }
     public void PushLinkToRightest()
     {
         if (this.higher == null)
@@ -161,16 +181,18 @@ public class Grid
     {
         if (!CheckAddValid(grid))
         {
-            DelinkHigherGrids();
-            DelinkLowerGrids();
+            /*DelinkHigherGrids();
+            DelinkLowerGrids();*/
+            DelinkWholeGrids();
         }
         else
         {
             this.higher = grid;
             grid.lower = this;
             this.canOccupy = true;
-            grid.canOccupy = false;
+            /*grid.canOccupy = false;*/
         }
+        grid.canOccupy = false;
         return grid;
     }
 

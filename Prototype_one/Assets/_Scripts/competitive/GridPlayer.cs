@@ -5,7 +5,8 @@ using System.Linq;
 
 public class GridPlayer : MonoBehaviour
 {
-    public Player id;
+    [SerializeField]
+    private Player id;
     private Grid lastGrid;
     // Start is called before the first frame update
     void Start()

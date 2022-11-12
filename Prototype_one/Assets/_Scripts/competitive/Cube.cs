@@ -9,8 +9,8 @@ public class Cube : MonoBehaviour
     public static Color GREEN = Color.green;
     public static Color BLUE = Color.blue;
     public static Color NULL = Color.white;
-    public static float RANDOM_LOWER = 0.8f;
-    public static float RANDOM_UPPER = 0.1f;
+    public static float RANDOM_LOWER = 0.4f;
+    public static float RANDOM_UPPER = 0.6f;
     public static Vector3 offSet = new Vector3(0, 0.2f, 0);
 
     public float duration;
@@ -19,7 +19,9 @@ public class Cube : MonoBehaviour
     private int y;
     private IEnumerator logicCo;
     private IEnumerator translateCo;
+    private IEnumerator colorCo;
     private Material mat;
+    private Color initColor;
     private Vector3 initPos;
     private Vector3 endPos;
     private System.Tuple<int, int> key;
@@ -30,6 +32,7 @@ public class Cube : MonoBehaviour
     {
         isEnd = false;
         mat = gameObject.GetComponent<Renderer>().material;
+        initColor = mat.color;
         initPos = gameObject.transform.position;
         endPos = initPos + offSet;
     }
@@ -66,12 +69,15 @@ public class Cube : MonoBehaviour
         GridPlayer player = other.GetComponent<GridPlayer>();
         if(player != null)
         {
-            //change date inside grid, gridplayer
+            //change data inside grid, gridplayer
             logicCo = CountDown(player);
             StartCoroutine(logicCo);
             //handle translation effect
             translateCo = MoveUp();
             StartCoroutine(translateCo);
+            //handle color transition
+            colorCo = LerpColor(FindColor(player), this.duration);
+            StartCoroutine(colorCo);
             //handle UI
             key = System.Tuple.Create(x,y);
             LoadingUIManager.instance.LoadUI(key, initPos, duration);
@@ -83,11 +89,19 @@ public class Cube : MonoBehaviour
         GridPlayer player = other.GetComponent<GridPlayer>();
         if (player != null)
         {
-            StopCoroutine(logicCo);
-            StopCoroutine(translateCo);
             //handle translation effect
+            StopCoroutine(translateCo);
             translateCo = MoveDown();
             StartCoroutine(translateCo);
+            //stop data changing inside grid, gridplayer
+            StopCoroutine(logicCo);
+            if (this.parent.GetPlayer() != player.GetId())
+            {
+                //color transition back to normal
+                StopCoroutine(colorCo);
+                colorCo = LerpColor(initColor, 0.2f);
+                StartCoroutine(colorCo);
+            }
         }
         LoadingUIManager.instance.StopLoadingUI(key);
     }
@@ -138,14 +152,11 @@ public class Cube : MonoBehaviour
             this.parent.DelinkLowerGrids();
         }
         //step to a grid that explored before
-        if (player.GetId() == this.parent.GetPlayer())
+        if (player.GetId() == this.parent.GetPlayer() && player.GetCurrentGrid().CheckAddValid(this.parent))
         {
             player.PushGridToHighest(this.parent);
             return;
         }
-        //manipulating grid color
-        Color c = FindColor(player);
-        SetColor(c);
         player.AddGridToMemo(this.parent);
     }
     private Color FindColor(GridPlayer p)
@@ -168,6 +179,23 @@ public class Cube : MonoBehaviour
     {
         mat.SetColor("_EmissionColor", c);
         mat.SetColor("_BaseColor", c);
+        this.initColor = c;
+    }
+
+    IEnumerator LerpColor(Color c, float time)
+    {
+        float timer = 0.0f;
+        while (timer <= time)
+        {
+            var tempColor = Color.Lerp(initColor, c, timer / time);
+            mat.SetColor("_BaseColor", tempColor);
+            mat.SetColor("_EmissionColor", tempColor);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        mat.SetColor("_BaseColor", c);
+        mat.SetColor("_EmissionColor", c);
+        initColor = c;
     }
     public void SetParentGrid(Grid grid)
     {

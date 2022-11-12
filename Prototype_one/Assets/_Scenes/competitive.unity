@@ -960,7 +960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fbea8103fee6a41b77243d52c803eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
+  id: 0
 --- !u!54 &777875802
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fbea8103fee6a41b77243d52c803eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 0
 --- !u!65 &1020190929
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2203,7 +2203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fbea8103fee6a41b77243d52c803eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 2
 --- !u!54 &1346734880
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3155,7 +3155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fbea8103fee6a41b77243d52c803eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 0
 --- !u!54 &1738007629
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3970,7 +3970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fbea8103fee6a41b77243d52c803eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 0
 --- !u!54 &2063893741
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4339,11 +4339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22448350, guid: 47ca69b8a412c4609b98f50013158181, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -70505.72
+      value: -84442.8
       objectReference: {fileID: 0}
     - target: {fileID: 22448350, guid: 47ca69b8a412c4609b98f50013158181, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 12881.293
+      value: 14775.6
       objectReference: {fileID: 0}
     - target: {fileID: 22458760, guid: 47ca69b8a412c4609b98f50013158181, type: 3}
       propertyPath: m_AnchorMax.y
