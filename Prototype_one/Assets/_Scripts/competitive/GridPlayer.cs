@@ -6,21 +6,13 @@ using System.Linq;
 public class GridPlayer : MonoBehaviour
 {
     public Player id;
-    private int gridsAdded = 0;
-    private Dictionary<int, Grid> memory;
     private Grid lastGrid;
     // Start is called before the first frame update
     void Start()
     {
         lastGrid = null;
-        memory = new Dictionary<int, Grid>();
     }
 
-    // Update is called once per frame
-/*    void Update()
-    {
-
-    }*/
 
     public Player GetId()
     {
@@ -29,92 +21,21 @@ public class GridPlayer : MonoBehaviour
     //adding a grid to the memory
     public void AddGridToMemo(Grid grid)
     {
-        if (this.lastGrid != null)
-            this.lastGrid.SetOccupied(true);
-        if (!checkAddValid(grid))
-            EmptyMemo();
-        //make the most recent grid cannot be occupied
+        if(lastGrid == null)
+        {
+            this.lastGrid = grid;
+            this.lastGrid.SetOccupied(false);
+            this.lastGrid.SetPlayer(this.id);
+            return;
+        }
+        this.lastGrid = this.lastGrid.AddGrid(grid);
+        this.lastGrid.SetPlayer(this.id);
+    }
+
+    public void PushGridToHighest(Grid grid)
+    {
+        grid.PushLinkToRightest();
         this.lastGrid = grid;
-        this.lastGrid.SetOccupied(false);
-        gridsAdded++;
-        grid.SetSequence(this.gridsAdded);
-        grid.SetPlayer(this.id);
-        grid.SetPlayerScript(this);
-        memory.Add(gridsAdded, grid);
-    }
-    //check whether an addition is valid
-    private bool checkAddValid(Grid grid)
-    {
-        if (lastGrid == null)
-            return true;
-        if (Mathf.Abs(lastGrid.GetX() - grid.GetX()) + Mathf.Abs(lastGrid.GetY() - grid.GetY()) > 1)
-            return false;
-        return true;
-    }
-    //Empty the memory
-    public void EmptyMemo()
-    {
-        foreach(var g in memory)
-        {
-            g.Value.SetPlayer(Player.PLAYER_NULL);
-            g.Value.SetSequence(-1);
-            g.Value.SetOccupied(true);
-            g.Value.SetPlayerScript(null);
-            g.Value.GetCube().SetColor(Cube.NULL);
-        }
-        memory.Clear();
-        gridsAdded = 0;
-    }
-    //readding a grid to the memory
-    public void ResetGridInMemo(Grid grid)
-    {
-        foreach (var m in memory)
-        {
-            if (m.Value == grid)
-            {
-                memory.Remove(m.Key);
-                AddGridToMemo(grid);
-                break;
-            }
-        }
-    }
-    //delete the grids that are added to the memory before
-    //a certain grid being added
-    public void DeleteLowerMemoByGrid(Grid grid)
-    {
-        int sequence = grid.GetSequence();
-        foreach (var m in memory)
-        {
-            if(m.Key <= sequence)
-            {
-                m.Value.SetPlayer(Player.PLAYER_NULL);
-                m.Value.SetSequence(-1);
-                m.Value.SetOccupied(true);
-                m.Value.SetPlayerScript(null);
-                m.Value.GetCube().SetColor(Cube.NULL);
-                /*memory.Remove(m.Key);*/
-            }
-        }
-        memory = memory.Where(kvp => kvp.Key > sequence).ToDictionary(k=>k.Key, k=>k.Value);
-    }
-    //delete the grids that are added to the memory after
-    //a certain grid being added
-    public void DeleteUpperMemoByGrid(Grid grid)
-    {
-        int sequence = grid.GetSequence();
-        foreach (var m in memory)
-        {
-            if (m.Key > sequence)
-            {
-                m.Value.SetPlayer(Player.PLAYER_NULL);
-                m.Value.SetSequence(-1);
-                m.Value.SetOccupied(true);
-                m.Value.SetPlayerScript(null);
-                m.Value.GetCube().SetColor(Cube.NULL);
-                /*memory.Remove(m.Key);*/
-            }
-        }
-        memory = memory.Where(kvp => kvp.Key <= sequence).ToDictionary(k => k.Key, k => k.Value);
     }
     //return the current grid
     public Grid GetCurrentGrid()

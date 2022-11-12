@@ -133,23 +133,20 @@ public class Cube : MonoBehaviour
     private void HandleGridUpdate(GridPlayer player)
     {
         //robbing other's grid
-        if (player.GetId() != this.parent.GetPlayer())
+        if (player.GetId() != this.parent.GetPlayer() && this.parent.GetPlayer() != Player.PLAYER_NULL)
         {
-            if (this.parent.GetPlayerScript() != null)
-                this.parent.GetPlayerScript().DeleteLowerMemoByGrid(this.parent);
+            this.parent.DelinkLowerGrids();
         }
         //step to a grid that explored before
         if (player.GetId() == this.parent.GetPlayer())
         {
-            /*if (this.parent.GetPlayerScript() != null)
-                this.parent.GetPlayerScript().DeleteUpperMemoByGrid(this.parent);*/
-            this.parent.GetPlayerScript().ResetGridInMemo(this.parent);
+            player.PushGridToHighest(this.parent);
             return;
         }
         //manipulating grid color
         Color c = FindColor(player);
         SetColor(c);
-        player.AddGridToMemo(parent);
+        player.AddGridToMemo(this.parent);
     }
     private Color FindColor(GridPlayer p)
     {

@@ -18,10 +18,11 @@ public class Grid
     private Vector3 initPos;
     private float gridSize;
     private Vector3 worldPos;
-    private int sequence;
-    private GridPlayer playerScript;
     private Cube cube;
     private bool canOccupy;
+    //doubled link list like
+    public Grid higher;
+    public Grid lower;
 
     public Grid(int x, int y, Vector3 initPos, float gridSize, Player player)
     {
@@ -31,19 +32,10 @@ public class Grid
         this.gridSize = gridSize;
         this.worldPos = CalculateWorldPos(x, y, initPos, gridSize);
         this.player = player;
-        this.sequence = -1;
         this.canOccupy = true;
+        this.higher = null;
+        this.lower = null;
     }
-/*    public Grid(int x, int y, Vector3 initPos, float gridSize, Player player, GameObject obj)
-    {
-        this.x = x;
-        this.y = y;
-        this.initPos = initPos;
-        this.gridSize = gridSize;
-        this.worldPos = CalculateWorldPos(x, y, initPos, gridSize);
-        this.player = player;
-        this.obj = obj;
-    }*/
     
     //get the world position of the grid
     private Vector3 CalculateWorldPos(int x, int y, Vector3 initPos, float gridSize)
@@ -76,25 +68,6 @@ public class Grid
         return this.y;
     }
 
-    public int GetSequence()
-    {
-        return this.sequence;
-    }
-
-    public void SetSequence(int i)
-    {
-        this.sequence = i;
-    }
-
-    public GridPlayer GetPlayerScript()
-    {
-        return this.playerScript;
-    }
-
-    public void SetPlayerScript(GridPlayer ps)
-    {
-        this.playerScript = ps;
-    }
     public void SetCube(Cube obj)
     {
         this.cube = obj;
@@ -114,6 +87,91 @@ public class Grid
         return this.canOccupy;
     }
 
+    public void DelinkLowerGrids()
+    {
+        Grid temp = this;
+        Grid right = temp.higher;
+        if(right != null)
+        {
+            right.lower = null;
+            temp.higher = null;
+        }
+        while (temp != null)
+        {
+            Grid prevGrid = temp.lower;
+            temp.lower = null;
+            if(prevGrid != null)
+                prevGrid.higher = null;
+            temp.SetPlayer(Player.PLAYER_NULL);
+/*            temp.SetSequence(-1);*/
+            temp.SetOccupied(true);
+/*            temp.SetPlayerScript(null);*/
+            temp.GetCube().SetColor(Cube.NULL);
+            temp = prevGrid;
+        }
+    }
+    public void DelinkHigherGrids()
+    {
+        Grid temp = this;
+        while (temp != null)
+        {
+            Grid nextGrid = temp.higher;
+            temp.higher = null;
+            if(nextGrid != null)
+                nextGrid.lower = null;
+            temp.SetPlayer(Player.PLAYER_NULL);
+/*            temp.SetSequence(-1);*/
+            temp.SetOccupied(true);
+/*            temp.SetPlayerScript(null);*/
+            temp.GetCube().SetColor(Cube.NULL);
+            temp = nextGrid;
+        }
+    }
+    public void PushLinkToRightest()
+    {
+        if (this.higher == null)
+            return;
+        var left = this.lower;
+        var right = this.higher;
+        var highest = this;
+        while(highest.higher != null)
+        {
+            highest = highest.higher;
+        }
+        if (left != null)
+            left.higher = right;
+        right.lower = left;
+        highest.higher = this;
+        this.lower = highest;
+        this.higher = null;
+        highest.SetOccupied(true);
+        this.SetOccupied(false);
+    }
 
+    public bool CheckAddValid(Grid grid)
+    {
+        if (Mathf.Abs(this.GetX() - grid.GetX()) + Mathf.Abs(this.GetY() - grid.GetY()) > 1)
+        {
+            Debug.Log("invalid!");
+            return false;
+        }
+        return true;
+    }
+    public Grid AddGrid(Grid grid)
+    {
+        if (!CheckAddValid(grid))
+        {
+            DelinkHigherGrids();
+            DelinkLowerGrids();
+        }
+        else
+        {
+            this.higher = grid;
+            grid.lower = this;
+            this.canOccupy = true;
+            grid.canOccupy = false;
+        }
+        return grid;
+    }
 
 }
