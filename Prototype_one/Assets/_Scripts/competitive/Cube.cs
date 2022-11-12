@@ -25,7 +25,6 @@ public class Cube : MonoBehaviour
     private System.Tuple<int, int> key;
     //temp
     private bool isEnd;
-    /*private Renderer r;*/
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +61,8 @@ public class Cube : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!this.parent.GetOccupied())
+            return;
         GridPlayer player = other.GetComponent<GridPlayer>();
         if(player != null)
         {
@@ -72,7 +73,6 @@ public class Cube : MonoBehaviour
             translateCo = MoveUp();
             StartCoroutine(translateCo);
             //handle UI
-            /*uimanager.InstantiateUI(initPos, duration);*/
             key = System.Tuple.Create(x,y);
             LoadingUIManager.instance.LoadUI(key, initPos, duration);
         }

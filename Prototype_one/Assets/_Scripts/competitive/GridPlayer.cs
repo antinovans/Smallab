@@ -26,18 +26,23 @@ public class GridPlayer : MonoBehaviour
     {
         return this.id;
     }
-
+    //adding a grid to the memory
     public void AddGridToMemo(Grid grid)
     {
+        if (this.lastGrid != null)
+            this.lastGrid.SetOccupied(true);
         if (!checkAddValid(grid))
             EmptyMemo();
+        //make the most recent grid cannot be occupied
         this.lastGrid = grid;
+        this.lastGrid.SetOccupied(false);
         gridsAdded++;
         grid.SetSequence(this.gridsAdded);
         grid.SetPlayer(this.id);
         grid.SetPlayerScript(this);
         memory.Add(gridsAdded, grid);
     }
+    //check whether an addition is valid
     private bool checkAddValid(Grid grid)
     {
         if (lastGrid == null)
@@ -46,19 +51,21 @@ public class GridPlayer : MonoBehaviour
             return false;
         return true;
     }
+    //Empty the memory
     public void EmptyMemo()
     {
         foreach(var g in memory)
         {
             g.Value.SetPlayer(Player.PLAYER_NULL);
             g.Value.SetSequence(-1);
+            g.Value.SetOccupied(true);
             g.Value.SetPlayerScript(null);
             g.Value.GetCube().SetColor(Cube.NULL);
         }
         memory.Clear();
         gridsAdded = 0;
     }
-
+    //readding a grid to the memory
     public void ResetGridInMemo(Grid grid)
     {
         foreach (var m in memory)
@@ -67,9 +74,12 @@ public class GridPlayer : MonoBehaviour
             {
                 memory.Remove(m.Key);
                 AddGridToMemo(grid);
+                break;
             }
         }
     }
+    //delete the grids that are added to the memory before
+    //a certain grid being added
     public void DeleteLowerMemoByGrid(Grid grid)
     {
         int sequence = grid.GetSequence();
@@ -79,6 +89,7 @@ public class GridPlayer : MonoBehaviour
             {
                 m.Value.SetPlayer(Player.PLAYER_NULL);
                 m.Value.SetSequence(-1);
+                m.Value.SetOccupied(true);
                 m.Value.SetPlayerScript(null);
                 m.Value.GetCube().SetColor(Cube.NULL);
                 /*memory.Remove(m.Key);*/
@@ -86,6 +97,8 @@ public class GridPlayer : MonoBehaviour
         }
         memory = memory.Where(kvp => kvp.Key > sequence).ToDictionary(k=>k.Key, k=>k.Value);
     }
+    //delete the grids that are added to the memory after
+    //a certain grid being added
     public void DeleteUpperMemoByGrid(Grid grid)
     {
         int sequence = grid.GetSequence();
@@ -95,12 +108,18 @@ public class GridPlayer : MonoBehaviour
             {
                 m.Value.SetPlayer(Player.PLAYER_NULL);
                 m.Value.SetSequence(-1);
+                m.Value.SetOccupied(true);
                 m.Value.SetPlayerScript(null);
                 m.Value.GetCube().SetColor(Cube.NULL);
                 /*memory.Remove(m.Key);*/
             }
         }
         memory = memory.Where(kvp => kvp.Key <= sequence).ToDictionary(k => k.Key, k => k.Value);
+    }
+    //return the current grid
+    public Grid GetCurrentGrid()
+    {
+        return this.lastGrid;
     }
 }
 

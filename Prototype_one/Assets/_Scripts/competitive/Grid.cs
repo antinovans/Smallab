@@ -21,6 +21,7 @@ public class Grid
     private int sequence;
     private GridPlayer playerScript;
     private Cube cube;
+    private bool canOccupy;
 
     public Grid(int x, int y, Vector3 initPos, float gridSize, Player player)
     {
@@ -31,7 +32,7 @@ public class Grid
         this.worldPos = CalculateWorldPos(x, y, initPos, gridSize);
         this.player = player;
         this.sequence = -1;
-        playerScript = null;
+        this.canOccupy = true;
     }
 /*    public Grid(int x, int y, Vector3 initPos, float gridSize, Player player, GameObject obj)
     {
@@ -43,7 +44,8 @@ public class Grid
         this.player = player;
         this.obj = obj;
     }*/
-
+    
+    //get the world position of the grid
     private Vector3 CalculateWorldPos(int x, int y, Vector3 initPos, float gridSize)
     {
         Vector3 offset = new Vector3((gridSize / 2), 0, (-gridSize / 2));
@@ -100,6 +102,16 @@ public class Grid
     public Cube GetCube()
     {
         return this.cube;
+    }
+
+    public void SetOccupied(bool input) 
+    {
+        this.canOccupy = input;
+    }
+
+    public bool GetOccupied()
+    {
+        return this.canOccupy;
     }
 
 
