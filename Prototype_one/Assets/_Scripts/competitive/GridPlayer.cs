@@ -8,12 +8,13 @@ public class GridPlayer : MonoBehaviour
     [SerializeField]
     private Player id;
     private Grid lastGrid;
+    public bool isAdding;
     // Start is called before the first frame update
     void Start()
     {
         lastGrid = null;
+        isAdding = false;
     }
-
 
     public Player GetId()
     {
@@ -35,7 +36,7 @@ public class GridPlayer : MonoBehaviour
 
     public void PushGridToHighest(Grid grid)
     {
-        grid.PushLinkToRightest();
+        grid.PushGridToRightest();
         this.lastGrid = grid;
     }
     //return the current grid

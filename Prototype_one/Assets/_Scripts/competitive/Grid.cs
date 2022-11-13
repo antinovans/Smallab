@@ -36,19 +36,16 @@ public class Grid
         this.higher = null;
         this.lower = null;
     }
-    
     //get the world position of the grid
     private Vector3 CalculateWorldPos(int x, int y, Vector3 initPos, float gridSize)
     {
         Vector3 offset = new Vector3((gridSize / 2), 0, (-gridSize / 2));
         return initPos + offset;
     }
-
     public void SetPlayer(Player player)
     {
         this.player = player;
     }
-
     public Player GetPlayer()
     {
         return this.player;
@@ -57,17 +54,14 @@ public class Grid
     {
         return this.worldPos;
     }
-
     public int GetX()
     {
         return this.x;
     }
-
     public int GetY()
     {
         return this.y;
     }
-
     public void SetCube(Cube obj)
     {
         this.cube = obj;
@@ -76,17 +70,14 @@ public class Grid
     {
         return this.cube;
     }
-
     public void SetOccupied(bool input) 
     {
         this.canOccupy = input;
     }
-
     public bool GetOccupied()
     {
         return this.canOccupy;
     }
-
     public void DelinkLowerGrids()
     {
         Grid temp = this;
@@ -96,19 +87,20 @@ public class Grid
             right.lower = null;
             temp.higher = null;
         }
+        List<Cube> cubes = new List<Cube>();
         while (temp != null)
         {
+            if (temp != this)
+                cubes.Add(temp.GetCube());
             Grid prevGrid = temp.lower;
             temp.lower = null;
             if(prevGrid != null)
                 prevGrid.higher = null;
             temp.SetPlayer(Player.PLAYER_NULL);
-/*            temp.SetSequence(-1);*/
             temp.SetOccupied(true);
-/*            temp.SetPlayerScript(null);*/
-            temp.GetCube().SetColor(Cube.NULL);
             temp = prevGrid;
         }
+        CubeManager.instance.HandleCubesColor(cubes, Cube.NULL, 0.1f);
     }
     public void DelinkHigherGrids()
     {
@@ -129,25 +121,37 @@ public class Grid
     }
     public void DelinkWholeGrids()
     {
-        Grid highest = this;
+        List<Cube> cubes = new List<Cube>();
+        Grid highest = GetHighest();
         while(highest.higher != null)
         {
             highest = highest.higher;
         }
+        /*highest.SetAllLowerGridColor(Cube.NULL, 0.5f);*/
         while(highest != null)
         {
-            Debug.Log("Disconnect!");
             Grid left = highest.lower;
             if (left != null)
                 left.higher = null;
             highest.lower = null;
+            cubes.Add(highest.GetCube());
             highest.SetPlayer(Player.PLAYER_NULL);
             highest.SetOccupied(true);
-            highest.GetCube().SetColor(Cube.NULL);
+            /*highest.GetCube().SetColor(Cube.NULL);*/
             highest = left;
         }
+        CubeManager.instance.HandleCubesColor(cubes, Cube.NULL, 0.1f);
     }
-    public void PushLinkToRightest()
+    public Grid GetHighest()
+    {
+        Grid highest = this;
+        while (highest.higher != null)
+        {
+            highest = highest.higher;
+        }
+        return highest;
+    }
+    public void PushGridToRightest()
     {
         if (this.higher == null)
             return;
@@ -167,7 +171,6 @@ public class Grid
         highest.SetOccupied(true);
         this.SetOccupied(false);
     }
-
     public bool CheckAddValid(Grid grid)
     {
         if (Mathf.Abs(this.GetX() - grid.GetX()) + Mathf.Abs(this.GetY() - grid.GetY()) > 1)
@@ -195,5 +198,4 @@ public class Grid
         grid.canOccupy = false;
         return grid;
     }
-
 }
