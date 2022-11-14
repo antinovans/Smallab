@@ -100,7 +100,7 @@ public class Grid
             temp.SetOccupied(true);
             temp = prevGrid;
         }
-        CubeManager.instance.HandleCubesColor(cubes, Cube.NULL, 0.1f);
+        BoardManager.instance.HandleCubesColor(cubes, Cube.NULL, 0.1f);
     }
     public void DelinkHigherGrids()
     {
@@ -114,8 +114,8 @@ public class Grid
             temp.SetPlayer(Player.PLAYER_NULL);
 /*            temp.SetSequence(-1);*/
             temp.SetOccupied(true);
-/*            temp.SetPlayerScript(null);*/
-            temp.GetCube().SetColor(Cube.NULL);
+            /*            temp.SetPlayerScript(null);*/
+            temp.GetCube().SetColor(Cube.NULL, 1.0f);
             temp = nextGrid;
         }
     }
@@ -140,7 +140,7 @@ public class Grid
             /*highest.GetCube().SetColor(Cube.NULL);*/
             highest = left;
         }
-        CubeManager.instance.HandleCubesColor(cubes, Cube.NULL, 0.1f);
+        BoardManager.instance.HandleCubesColor(cubes, Cube.NULL, 0.1f);
     }
     public Grid GetHighest()
     {
@@ -175,7 +175,6 @@ public class Grid
     {
         if (Mathf.Abs(this.GetX() - grid.GetX()) + Mathf.Abs(this.GetY() - grid.GetY()) > 1)
         {
-            Debug.Log("invalid!");
             return false;
         }
         return true;
@@ -197,5 +196,12 @@ public class Grid
         }
         grid.canOccupy = false;
         return grid;
+    }
+    public void Reset()
+    {
+        this.player = Player.PLAYER_NULL;
+        this.canOccupy = true;
+        this.lower = null;
+        this.higher = null;
     }
 }

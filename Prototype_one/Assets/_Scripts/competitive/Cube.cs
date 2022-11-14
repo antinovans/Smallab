@@ -8,18 +8,15 @@ public class Cube : MonoBehaviour
     public static Color YELLOW = Color.yellow;
     public static Color GREEN = Color.green;
     public static Color BLUE = Color.blue;
-    public static Color YELLOW_H = Color.yellow;
-    public static Color GREEN_H = Color.green;
-    public static Color BLUE_H = Color.blue;
     public static Color NULL = Color.white;
     public static float RANDOM_LOWER = 0.4f;
     public static float RANDOM_UPPER = 0.6f;
     public static Vector3 offSet = new Vector3(0, 0.2f, 0);
 
-    public float duration;
-
     private int x;
     private int y;
+    private float duration;
+    private bool isActive;
     private IEnumerator logicCo;
     private IEnumerator translateCo;
     private IEnumerator colorCo;
@@ -28,42 +25,19 @@ public class Cube : MonoBehaviour
     private Vector3 initPos;
     private Vector3 endPos;
     private System.Tuple<int, int> key;
-    //temp
-    private bool isEnd;
     // Start is called before the first frame update
     void Start()
     {
-        isEnd = false;
         mat = gameObject.GetComponent<Renderer>().material;
         initColor = mat.color;
         initPos = gameObject.transform.position;
         endPos = initPos + offSet;
     }
-    // Update is called once per frame
-    // calculate winner
-    void Update()
-    {
-        if(BoardGenerator.isEnd && !isEnd)
-        {
-            isEnd = true;
-            switch(BoardGenerator.CalculateWinner())
-            {
-                case Player.PLAYER_BLUE:
-                    SetColor(BLUE);
-                    break;
-                case Player.PLAYER_GREEN:
-                    SetColor(GREEN);
-                    break;
-                case Player.PLAYER_YELLOW:
-                    SetColor(YELLOW);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+
     private void OnTriggerEnter(Collider other)
     {
+        if (!isActive)
+            return;
         //when occupied: should consider newcomers
         if (!this.parent.GetOccupied())
             return;
@@ -76,8 +50,8 @@ public class Cube : MonoBehaviour
             //handle translation effect
             translateCo = MoveUp();
             StartCoroutine(translateCo);
-            //handle color transition
-            colorCo = LerpColor(FindColor(player), this.duration, 10f) ;
+            //set cube color to shiny
+            colorCo = LerpColor(BoardManager.instance.FindColor(player), this.duration, 10f) ;
             StartCoroutine(colorCo);
             //handle UI
             key = System.Tuple.Create(x,y);
@@ -86,6 +60,8 @@ public class Cube : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
+        if (!isActive)
+            return;
         GridPlayer player = other.GetComponent<GridPlayer>();
         if (player != null)
         {
@@ -93,20 +69,12 @@ public class Cube : MonoBehaviour
             //leaving other's current grid shouldn't cancel out other's effect
             if (this.parent.GetPlayer() != Player.PLAYER_NULL && player.GetId() != this.parent.GetPlayer())
                 return;
-            //entering other's current grid shouldn't cancel out current's effect
-/*            if (player.GetCurrentGrid() == this.parent)
-                return;*/
-            //handle translation effect
-            StopCoroutine(translateCo);
+            //stop all the coroutines in OnTriggerEnter()
+            StopAllCoroutines();
+            //move cube back to original position
             translateCo = MoveDown();
             StartCoroutine(translateCo);
-            //stop data changing inside grid, gridplayer
-            StopCoroutine(logicCo);
-            if (this.parent.GetPlayer() != player.GetId())
-            {
-                //color transition back to normal
-                StopCoroutine(colorCo);
-            }
+            //set cube color to not shiny
             colorCo = LerpColor(initColor, 0.2f, 1f);
             StartCoroutine(colorCo);
         }
@@ -121,6 +89,22 @@ public class Cube : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+        HandleGridUpdate(player);
+        translateCo = MoveDown();
+        StartCoroutine(translateCo);
+    }
+    IEnumerator CountDown(GridPlayer player, Cube prevCube)
+    {
+        duration = Random.Range(RANDOM_LOWER, RANDOM_UPPER);
+        float timer = 0.0f;
+        while (timer <= duration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        //set current player's previous cube to not shiny mat
+        prevCube.SetColor(prevCube.GetInitColor(), 1f);
+        //update grid information
         HandleGridUpdate(player);
         translateCo = MoveDown();
         StartCoroutine(translateCo);
@@ -164,26 +148,10 @@ public class Cube : MonoBehaviour
         }
         player.AddGridToMemo(this.parent);
     }
-    private Color FindColor(GridPlayer p)
+    public void SetColor(Color c, float intensity)
     {
-        if (p.GetId() == Player.PLAYER_YELLOW)
-        {
-            return YELLOW;
-        }
-        if (p.GetId() == Player.PLAYER_BLUE)
-        {
-            return BLUE;
-        }
-        if (p.GetId() == Player.PLAYER_GREEN)
-        {
-            return GREEN;
-        }
-        return NULL;
-    }
-    public void SetColor(Color c)
-    {
-        mat.SetColor("_EmissionColor", c);
-        mat.SetColor("_BaseColor", c);
+        mat.SetColor("_EmissionColor", c * intensity);
+        mat.SetColor("_BaseColor", c * intensity);
         this.initColor = c;
     }
     public void SetColorWithLerp(Color c, float time, float intensity)
@@ -222,5 +190,15 @@ public class Cube : MonoBehaviour
     public Color GetInitColor()
     {
         return this.initColor;
+    }
+
+    public void Reset()
+    {
+        this.initColor = NULL;
+        SetColor(this.initColor, 1.0f);
+    }
+    public void SetActive(bool isActive)
+    {
+        this.isActive = isActive;
     }
 }
