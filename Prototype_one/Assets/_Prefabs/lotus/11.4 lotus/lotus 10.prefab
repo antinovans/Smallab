@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6427667177460524144}
   - component: {fileID: 7651573398826859818}
-  - component: {fileID: 2348397413373944821}
+  - component: {fileID: 340911513500875512}
   m_Layer: 0
   m_Name: lotus 10
   m_TagString: Untagged
@@ -300,7 +300,7 @@ MonoBehaviour:
   player1: {fileID: 0}
   player2: {fileID: 0}
   player3: {fileID: 0}
---- !u!135 &2348397413373944821
+--- !u!135 &340911513500875512
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,8 +308,8 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5942633378506915530}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0.8, z: 0}

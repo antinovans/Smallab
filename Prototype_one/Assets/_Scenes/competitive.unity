@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2f7aedef2795ea4daab599fff471371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameDuration: 5
+  gameDuration: 90
   timerText: {fileID: 1177409278}
 --- !u!1 &521984001 stripped
 GameObject:
@@ -1733,7 +1733,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 3372172950
-  m_fontColor: {r: 0.5873066, g: 0.2745098, b: 1, a: 0.78431374}
+  m_fontColor: {r: 0.5873066, g: 0.2745098, b: 1, a: 0.39215687}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4400,11 +4400,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22448350, guid: 47ca69b8a412c4609b98f50013158181, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -135272.22
+      value: -139371.44
       objectReference: {fileID: 0}
     - target: {fileID: 22448350, guid: 47ca69b8a412c4609b98f50013158181, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 20711.094
+      value: 21595.104
       objectReference: {fileID: 0}
     - target: {fileID: 22458760, guid: 47ca69b8a412c4609b98f50013158181, type: 3}
       propertyPath: m_AnchorMax.y

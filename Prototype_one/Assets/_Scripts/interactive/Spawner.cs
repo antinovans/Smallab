@@ -15,11 +15,11 @@ public class Spawner : MonoBehaviour
     public Vector3 offset;
     public float rotationDegree;
     public float showUpDuration;
-    private Vector3 LEAF_Y = new Vector3(0, 0.1f, 0);
+    /*private Vector3 LEAF_Y = new Vector3(0, 0.1f, 0);*/
     // Start is called before the first frame update
     void Start()
     {
-        offset = new Vector3(0, -5f, 0);
+        offset = new Vector3(0, -3f, 0);
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour
         newLeaf.transform.position = pos + offset;
         newLeaf.transform.SetParent(lotusParent.transform);
         StartCoroutine(Rotate(newLeaf, showUpDuration, rotationDegree));
-        StartCoroutine(Translate(newLeaf, showUpDuration, pos + LEAF_Y));
+        /*StartCoroutine(Translate(newLeaf, showUpDuration, pos + LEAF_Y));*/
         return newLeaf;
     }
 
@@ -44,7 +44,7 @@ public class Spawner : MonoBehaviour
         newLotus.transform.position = pos + offset;
         newLotus.transform.SetParent(lotusParent.transform);
         StartCoroutine(Rotate(newLotus, showUpDuration, rotationDegree));
-        StartCoroutine(Translate(newLotus, showUpDuration, pos + LEAF_Y));
+        /*StartCoroutine(Translate(newLotus, showUpDuration, pos + LEAF_Y));*/
         return newLotus;
     }
 
