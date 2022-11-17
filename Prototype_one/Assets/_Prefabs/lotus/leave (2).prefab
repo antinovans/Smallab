@@ -120,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 6831779043312500888}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7715332906874296818}
@@ -220,10 +220,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6942737299552568136}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.2
+  m_Radius: 1.67
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7083469188458938339
 MonoBehaviour:
@@ -248,8 +248,8 @@ MonoBehaviour:
   AirAngularDrag: 0.1
   FloatingPower: 20
   WaterHeight: 0.05
-  WaveFrequency: 1
-  Offset: -0.1
+  WaveFrequency: 3
+  Offset: -0.2
 --- !u!54 &3884301309921725270
 Rigidbody:
   m_ObjectHideFlags: 0

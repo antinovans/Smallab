@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        offset = new Vector3(0, -3f, 0);
+        offset = new Vector3(0, -5f, 0);
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
 
     public GameObject SpawnLeaf(Vector3 pos)
     {
-        GameObject newLeaf = Instantiate(leaf[Random.Range(0, leaf.Length - 1)]);
+        GameObject newLeaf = Instantiate(leaf[Random.Range(0, leaf.Length)]);
         newLeaf.transform.position = pos + offset;
         newLeaf.transform.SetParent(lotusParent.transform);
         StartCoroutine(Rotate(newLeaf, showUpDuration, rotationDegree));
@@ -40,7 +40,7 @@ public class Spawner : MonoBehaviour
 
     public GameObject SpawnLotus(Vector3 pos)
     {
-        GameObject newLotus = Instantiate(lotus[Random.Range(0, lotus.Length - 1)]);
+        GameObject newLotus = Instantiate(lotus[Random.Range(0, lotus.Length)]);
         newLotus.transform.position = pos + offset;
         newLotus.transform.SetParent(lotusParent.transform);
         StartCoroutine(Rotate(newLotus, showUpDuration, rotationDegree));

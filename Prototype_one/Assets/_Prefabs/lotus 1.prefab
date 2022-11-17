@@ -273,9 +273,9 @@ MonoBehaviour:
   AirDrag: 2
   AirAngularDrag: 0
   FloatingPower: 20
-  WaterHeight: 0.05
+  WaterHeight: 0.1
   WaveFrequency: 1
-  Offset: -0.2
+  Offset: -0.4
 --- !u!1 &7750056848284491671
 GameObject:
   m_ObjectHideFlags: 0

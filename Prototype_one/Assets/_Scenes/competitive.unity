@@ -147,7 +147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &159856449
 Transform:
   m_ObjectHideFlags: 0
@@ -879,7 +879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fbea8103fee6a41b77243d52c803eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 2
   isAdding: 0
 --- !u!54 &777875802
 Rigidbody:
@@ -1029,7 +1029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &852761709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1634,7 +1634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1117722453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2169,7 +2169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1346734875
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2823,7 +2823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1651252349
 Transform:
   m_ObjectHideFlags: 0
@@ -3201,7 +3201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1738007628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4034,7 +4034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fbea8103fee6a41b77243d52c803eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   isAdding: 0
 --- !u!54 &2063893741
 Rigidbody:
@@ -4404,11 +4404,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22448350, guid: 47ca69b8a412c4609b98f50013158181, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -142650.81
+      value: -145930.19
       objectReference: {fileID: 0}
     - target: {fileID: 22448350, guid: 47ca69b8a412c4609b98f50013158181, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 22100.252
+      value: 23110.549
       objectReference: {fileID: 0}
     - target: {fileID: 22458760, guid: 47ca69b8a412c4609b98f50013158181, type: 3}
       propertyPath: m_AnchorMax.y

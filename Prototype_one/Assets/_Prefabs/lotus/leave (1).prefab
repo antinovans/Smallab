@@ -44,10 +44,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419617275570541402}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.2
+  m_Radius: 1.66
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3690627839434230758
 Rigidbody:
@@ -88,8 +88,8 @@ MonoBehaviour:
   AirAngularDrag: 0.1
   FloatingPower: 20
   WaterHeight: 0.05
-  WaveFrequency: 1
-  Offset: -0.1
+  WaveFrequency: 3
+  Offset: -0.2
 --- !u!1 &2121553706958775175
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 3253193746192650378}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1799380227731982816}

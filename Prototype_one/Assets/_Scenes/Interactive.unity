@@ -1964,7 +1964,8 @@ MonoBehaviour:
   - {fileID: 6942737299552568136, guid: b71fb035eeff2d443910583fb0701962, type: 3}
   - {fileID: 5324198384622209961, guid: 7e7fdfbf10714604687826454748be6c, type: 3}
   lotus:
-  - {fileID: 4504599995773539600, guid: ba1ddefeeab1b2942a0613246080d337, type: 3}
+  - {fileID: 5769942472383708453, guid: eaad611cb48ad594994a13e1ef52ea72, type: 3}
+  - {fileID: 9209013035246135646, guid: d591d478c766a6349beebd81cb11fbaa, type: 3}
   offset: {x: 0, y: -0.5, z: 0}
   rotationDegree: 360
   showUpDuration: 2
