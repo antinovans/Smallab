@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("Count Down Text")]
     [SerializeField]
     private TextMeshProUGUI timerText;
+    private VideoPlayer videoPlayer;
     private void Awake()
     {
         if (instance == null)
@@ -29,11 +31,21 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SoundManager.instance.PlaySound("Background", true);
+        videoPlayer = GetComponent<VideoPlayer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*        if(Input.GetKeyDown(KeyCode.Return) && !videoFinished)
+                {
+                    videoPlayer.targetCameraAlpha = 1;
+                    videoPlayer.Play();
+                }*/
+        if (!videoPlayer.isPlaying)
+        {
+            videoPlayer.enabled = false;
+        }
         if (Input.GetKeyDown(KeyCode.Space) && !isStarted)
         {
             StartGame();

@@ -47,7 +47,7 @@ Material:
     - Vector1_9b828d1b7ceb4e179e9d46949e34b1c2: -1
     - _DeepWaterSpeed: -75
     - _Depth: 0
-    - _Displacement: 0.5
+    - _Displacement: 0
     - _NoiseScale: 100
     - _NormalStrength: 2
     - _QueueControl: 0
@@ -55,7 +55,7 @@ Material:
     - _ShallowWaterSpeed: 150
     - _Smoothness: 0.2
     - _Strength: 0.28
-    - _TideSpeed: 10
+    - _TideSpeed: 1
     - _WaveHeight: 0
     - _WaveSpeed: 300
     m_Colors:
