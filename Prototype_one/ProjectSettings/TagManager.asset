@@ -10,6 +10,9 @@ TagManager:
   - Player1
   - Player2
   - Player3
+  - Sadness
+  - Depression
+  - BitterSweet
   layers:
   - Default
   - TransparentFX

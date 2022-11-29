@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class AngryAttribute : EmotionAttribute
 {
-    public GameObject angry;
     public bool isSplitable;
 
     public static int DEFAULT_MASS = 2;

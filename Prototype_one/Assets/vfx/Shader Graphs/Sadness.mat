@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9121362790925716456
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sadness
+  m_Shader: {fileID: -6465566751694194690, guid: 9075be9670eb4c34685894f38d7ca2a5,
+    type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - Vector1_7d58dda9eb2e44058c16e5f61eb01f39: 1.74
+    - Vector1_964b6c6dd4c542108848d76fb55fe704: 0
+    - _AddPowerFresnel: 2
+    - _ChaosSadness: 0.1
+    - _FresnelPower: 6
+    - _Metallic: 0
+    - _NoiseScale: 20
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ScrollSpeed: 0.1
+    - _Smoothness: 0
+    - _Speed: 0.63
+    - _time: 1.87
+    m_Colors:
+    - Color_67ea1c7258964a2fa53a20a471c2e33b: {r: 0.106799535, g: 0.41820985, b: 0.6792453,
+        a: 0}
+    - Color_96ac37e167f345c89868c2fd7dbb2951: {r: 0, g: 0, b: 0, a: 0}
+    - Color_dfa84b722ca243a3a80826c80370bd84: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
