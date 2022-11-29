@@ -481,7 +481,7 @@ MonoBehaviour:
   UnderWaterAngularDrag: 0
   AirDrag: 2
   AirAngularDrag: 0
-  FloatingPower: 20
+  FloatingPower: 10
   WaterHeight: 0.1
   WaveFrequency: 1
   Offset: -0.2

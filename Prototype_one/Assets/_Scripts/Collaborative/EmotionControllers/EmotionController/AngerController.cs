@@ -140,7 +140,6 @@ public class AngerController : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Sadness") || collision.gameObject.CompareTag("Depression"))
         {
-            Debug.Log("collide sadness");
             isScalingDown = true;
             for(int i = 0; i < 3*size; i++)
             {

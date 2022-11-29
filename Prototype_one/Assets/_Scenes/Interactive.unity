@@ -4811,7 +4811,7 @@ MonoBehaviour:
   - {fileID: 5942633378506915530, guid: 8e8b6f6c4e19d32479bf640cac4df2e2, type: 3}
   spawnHeight: -1
   offset: {x: 0, y: -0.5, z: 0}
-  rotationDegree: 360
+  rotationDegree: 180
   showUpDuration: 2
 --- !u!114 &1438360881
 MonoBehaviour:
