@@ -138,15 +138,16 @@ public class AngerController : MonoBehaviour
             SetSize(this.size / 2);
             ChangeColor();
         }
-        if (collision.gameObject.CompareTag("Sadness"))
+        if (collision.gameObject.CompareTag("Sadness") || collision.gameObject.CompareTag("Depression"))
         {
+            Debug.Log("collide sadness");
             isScalingDown = true;
             for(int i = 0; i < 3*size; i++)
             {
                 var particle = Instantiate(AngerParticle, transform.position, Quaternion.identity);
                 particle.GetComponent<BezierMovement>().SetTarget(collision.gameObject);
             }
-            StartCoroutine(LerpScale(0.5f));
+            StartCoroutine(LerpScale(1f));
         }
     }
 }

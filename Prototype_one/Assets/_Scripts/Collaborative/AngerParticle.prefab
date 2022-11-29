@@ -130,8 +130,8 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   randRange: 0.5
   curveRatio: 0.3
-  minSpeed: 0.8
-  maxSpeed: 4
+  minSpeed: 1
+  maxSpeed: 8
   speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -147,8 +147,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0

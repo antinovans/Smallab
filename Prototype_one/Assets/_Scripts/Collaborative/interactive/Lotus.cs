@@ -96,8 +96,8 @@ public class Lotus : MonoBehaviour
         if (!isRotating)
         {
             isRotating = true;
-            /*            if (blossomAC != null)
-                            blossomAC.SetBool("shouldBlossom", true);*/
+            if (blossomAC != null)
+                blossomAC.SetBool("shouldBlossom", true);
             int i = UnityEngine.Random.Range(1, 5);
             string soundName = "lotus" + i;
             FindObjectOfType<SoundManager>().PlaySound(soundName, false);
