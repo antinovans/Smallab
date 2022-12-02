@@ -50,6 +50,16 @@ public class SadController : MonoBehaviour
         initializeVFXFields();
     }
 
+    private void Update()
+    {
+        if (!isDepression)
+        {
+            GameObject target = GameObject.FindGameObjectWithTag("Anger");
+            if (target != null)
+                GetComponent<BasicMovement>().targetPos = target.transform;
+        }
+    }
+
     //transform related
     public void SetSize(int size)
     {
@@ -71,15 +81,15 @@ public class SadController : MonoBehaviour
     IEnumerator LerpScale()
     {
         float timer = 0.0f;
-        while (timer < 1.0f)
+        /*while (timer < 1.0f)
         {
             timer += Time.deltaTime;
             yield return null;
-        }
-        timer = 0.0f;
+        }*/
+        /*timer = 0.0f;*/
         var beginScale = prevSize * defaultScale;
         var endScale = size * defaultScale;
-        while (timer < 1.0f)
+        while (timer < 0.5f)
         {
             timer += Time.deltaTime;
             float portion = scaleTransition.Evaluate(timer);
@@ -139,14 +149,37 @@ public class SadController : MonoBehaviour
                 SetSize(collision.gameObject.GetComponent<AngerController>().size + this.size);
                 TurnToDepression();
             }
+            if (collision.gameObject.CompareTag("Depression") && isSplitable)
+            {
+                Destroy(collision.gameObject);
+            }
         }
         //depression collision behavior
+        if (isDepression)
+        {
+            if (collision.gameObject.CompareTag("Joy") && isSplitable && !isScalingDown)
+            {
+                isScalingDown = true;
+                SetSize(this.size - collision.gameObject.GetComponent<JoyController>().size);
+            }
+            if (collision.gameObject.CompareTag("Anger") && !isScalingDown)
+            {
+                SetSize(collision.gameObject.GetComponent<AngerController>().size + this.size);
+            }
+            if (collision.gameObject.CompareTag("Sadness") && !isScalingDown)
+            {
+                SetSize(collision.gameObject.GetComponent<SadController>().size + this.size);
+            }
+        }
 
     }
 
     private void TurnToDepression()
     {
         gameObject.tag = "Depression";
+        GameObject target = GameObject.FindGameObjectWithTag("Gate");
+        if (target != null)
+            GetComponent<BasicMovement>().targetPos = target.transform;
         StartCoroutine(LerpColor(depressionColor, 1f, intensity));
     }
 }

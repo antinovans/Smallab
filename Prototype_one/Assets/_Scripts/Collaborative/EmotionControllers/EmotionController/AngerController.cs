@@ -30,11 +30,11 @@ public class AngerController : MonoBehaviour
     //rigidbody and transform related
     public static int DEFAULT_MASS = 2;
     public static Vector3 DEFAULT_SCALE = new Vector3(0.1f, 0.1f, 0.1f);
-    public static int MAX_SIZE = 8;
+    public static int MAX_SIZE = 4;
     //vfx related
-    public static float DEFAULT_TIME_FACTOR = 3.0f;
-    public static float DEFAULT_CELL_DENSITY = 1.0f;
-    public static float DEFAULT_CHAOS_FACTOR = 0.05f;
+    public static float DEFAULT_TIME_FACTOR = 6.0f;
+    public static float DEFAULT_CELL_DENSITY = 2.0f;
+    public static float DEFAULT_CHAOS_FACTOR = 0.1f;
     //components on the gameobject
     //transform local fields
     private bool isScalingDown = false;
@@ -87,7 +87,7 @@ public class AngerController : MonoBehaviour
         float timer = 0.0f;
         var beginScale = prevSize * defaultScale;
         var endScale = newSize * defaultScale;
-        while (timer < 1.0f)
+        while (timer < 0.5f)
         {
             timer += Time.deltaTime;
             float portion = scaleTransition.Evaluate(timer);
@@ -141,12 +141,12 @@ public class AngerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Sadness") || collision.gameObject.CompareTag("Depression"))
         {
             isScalingDown = true;
-            for(int i = 0; i < 3*size; i++)
+            for(int i = 0; i < 6*size; i++)
             {
                 var particle = Instantiate(AngerParticle, transform.position, Quaternion.identity);
                 particle.GetComponent<BezierMovement>().SetTarget(collision.gameObject);
             }
-            StartCoroutine(LerpScale(1f));
+            StartCoroutine(LerpScale(0f));
         }
     }
 }

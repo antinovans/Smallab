@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timerText;
     private VideoPlayer videoPlayer;
+    [Header("Videos")]
+    [SerializeField]
+    VideoClip tutorial;
+    [SerializeField]
+    VideoClip countdown;
+
     private void Awake()
     {
         if (instance == null)
@@ -32,19 +38,16 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.instance.PlaySound("Background", true);
         videoPlayer = GetComponent<VideoPlayer>();
+        /*videoPlayer.clip = tutorial;
+        videoPlayer.Play();*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*        if(Input.GetKeyDown(KeyCode.Return) && !videoFinished)
-                {
-                    videoPlayer.targetCameraAlpha = 1;
-                    videoPlayer.Play();
-                }*/
-        if (!videoPlayer.isPlaying)
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            videoPlayer.enabled = false;
+            StartCoroutine(PlayVideo(tutorial));
         }
         if (Input.GetKeyDown(KeyCode.Space) && !isStarted)
         {
@@ -53,32 +56,43 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    IEnumerator PlayVideo(VideoClip clip)
+    {
+        videoPlayer.targetCameraAlpha = 1.0f;
+        videoPlayer.clip = clip;
+        videoPlayer.Play();
+        while (videoPlayer.isPlaying)
+        {
+            yield return null;
+        }
+        videoPlayer.targetCameraAlpha = 0.0f;
+    }
 
     public void StartGame()
     {
-        BoardManager.instance.InitializeBoard();
         //UI Start Count down
-        StartCoroutine(GameStartCountDown(3.0f));
+        StartCoroutine(GameStartCountDown());
     }
 
     public void EndGame()
     {
         BoardManager.instance.DisableAllCubes();
         BoardManager.instance.ShowWinners();
+        SoundManager.instance.PlaySound("Win", false);
         isStarted = false;
     }
 
-    IEnumerator GameStartCountDown(float time)
+    IEnumerator GameStartCountDown()
     {
-        float timer = time;
-        while (timer >= 1)
+        videoPlayer.targetCameraAlpha = 1.0f;
+        videoPlayer.clip = countdown;
+        videoPlayer.Play();
+        while (videoPlayer.isPlaying)
         {
-            timer -= Time.deltaTime;
-            timerText.text = timer.ToString("0");
             yield return null;
         }
-        timer = 0;
-        timerText.text = timer.ToString("0");
+        videoPlayer.targetCameraAlpha = 0.0f;
+        BoardManager.instance.InitializeBoard();
         BoardManager.instance.EnableAllCubes();
         StartCoroutine(GameEndCountDown(this.gameDuration));
     }
@@ -88,6 +102,10 @@ public class GameManager : MonoBehaviour
         while (timer >= 0)
         {
             timer -= Time.deltaTime;
+            if (Mathf.Abs(timer - 60.0f) <= 0.1f)
+                SoundManager.instance.PlaySound("60", false);
+            if (Mathf.Abs(timer - 30.0f) <= 0.1f)
+                SoundManager.instance.PlaySound("30", false);
             timerText.text = timer.ToString("0");
             yield return null;
         }

@@ -36,5 +36,15 @@ public class JoyController : MonoBehaviour
             SoundManager.instance.PlaySound("Positive_Collision", false);
             Destroy(gameObject);
         }
+        if (collision.gameObject.CompareTag("Sadness"))
+        {
+            SoundManager.instance.PlaySound("Positive_Collision", false);
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.CompareTag("Depression"))
+        {
+            SoundManager.instance.PlaySound("Positive_Collision", false);
+            Destroy(gameObject);
+        }
     }
 }

@@ -50,7 +50,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RefractionScale: 0.2
+    - _RefractionScale: 0.3
     - _RefractionSpeed: 0.005
     - _RefractionStrength: 0.04
     - _WaterDepth: 1.17

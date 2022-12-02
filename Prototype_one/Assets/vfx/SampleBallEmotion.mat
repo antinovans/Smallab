@@ -38,10 +38,10 @@ Material:
     - _CellDensity: 5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Thickness: 1.5
-    - _TimeFactor: 7
+    - _Thickness: 20
+    - _TimeFactor: 8.03
     m_Colors:
-    - _Color: {r: 110.49699, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.1872549, g: 0.10392157, b: 0.04509804, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1173365527387893569
 MonoBehaviour:

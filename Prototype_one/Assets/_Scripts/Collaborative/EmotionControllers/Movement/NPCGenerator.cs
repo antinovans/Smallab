@@ -8,7 +8,7 @@ public class NPCGenerator : MonoBehaviour
 {
     public GameObject bottomLeft;
     public GameObject topRight;
-    public GameObject[] prefabs;
+    public GameObject prefabs;
     public int maxNum;
     public float interval;
 
@@ -16,20 +16,27 @@ public class NPCGenerator : MonoBehaviour
     public static float maxX;
     public static float minZ;
     public static float maxZ;
-    public static float playerY;
 
     private int curNum;
+    private bool isStart = false;
     // Start is called before the first frame update
     void Start()
     {
         InitializeBoudaries();
-        curNum = 5;
-        StartCoroutine(InstantiatePrefabs());
+        curNum = 0;
+/*        StartCoroutine(InstantiatePrefabs());*/
+    }
+    private void Update()
+    {
+        if (TestingController.begin && !isStart)
+        {
+            StartCoroutine(InstantiatePrefabs());
+            isStart = true;
+        }
     }
 
     private void InitializeBoudaries()
     {
-        playerY = GameObject.FindGameObjectWithTag("Player").transform.position.y;
         minX = bottomLeft.transform.position.x;
         maxX = topRight.transform.position.x;
         minZ = bottomLeft.transform.position.z;
@@ -39,9 +46,12 @@ public class NPCGenerator : MonoBehaviour
     {
         while (curNum <= maxNum)
         {
-            var obj = Instantiate(prefabs[UnityEngine.Random.Range(0, prefabs.Length)]);
-            obj.transform.position =  new Vector3(UnityEngine.Random.Range(minX, maxX)
-                , transform.position.y, UnityEngine.Random.Range(minX, maxX));
+            var obj = Instantiate(prefabs, transform.position,
+                Quaternion.identity);
+            if (obj.CompareTag("Anger"))
+                obj.GetComponent<AngerController>().SetSize(UnityEngine.Random.Range(2, 4));
+            if (obj.CompareTag("Sadness"))
+                obj.GetComponent<SadController>().SetSize(UnityEngine.Random.Range(2, 4));
             curNum++;
             yield return new WaitForSeconds(UnityEngine.Random.Range(interval - 1, interval + 1));
         }

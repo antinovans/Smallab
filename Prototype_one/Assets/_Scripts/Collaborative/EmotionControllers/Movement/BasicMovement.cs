@@ -18,12 +18,18 @@ public class BasicMovement : MonoBehaviour
 
     private void InitializePosition()
     {
-        transform.position = new Vector3(transform.position.x, NPCGenerator.playerY, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
     }
 
 
     private IEnumerator MoveToNextPos()
     {
+        float timer = 0.0f;
+        while (timer < 1.0f)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
         while (true)
         {
             FindNextPos();

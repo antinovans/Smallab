@@ -80,7 +80,7 @@ public class BezierMovement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Depression"))
+        if (other.gameObject.CompareTag("Depression") || other.gameObject.CompareTag("Sadness"))
             Destroy(gameObject);
     }
     public void SetTarget(GameObject target)
