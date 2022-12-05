@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d1e36c0853c5244b4f1af0517b10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 1
-  speed: 2
+  interval: 4
+  speed: 1
   targetPos: {fileID: 0}
 --- !u!114 &1354627822648455749
 MonoBehaviour:
@@ -205,11 +205,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  glowColorStart: {r: 0, g: 0.72492564, b: 0.9433962, a: 0}
-  glowColorEnd: {r: 0, g: 0.14995368, b: 0.3584906, a: 0}
+  glowColorStart: {r: 0, g: 0.71322393, b: 1, a: 0}
+  glowColorEnd: {r: 0, g: 0.04989648, b: 1, a: 0}
   primaryColor: {r: 0, g: 0, b: 0, a: 0}
-  glowColor: {r: 0.14448102, g: 0, b: 0.2924528, a: 0}
-  primaryColorStart: {r: 0.5434737, g: 0.38937345, b: 0.6603774, a: 0}
-  primaryColorEnd: {r: 0.21568628, g: 0, b: 0.3882353, a: 0}
+  glowColor: {r: 0.24719651, g: 0.41562808, b: 0.5188679, a: 0}
+  primaryColorStart: {r: 0.015686255, g: 0.39599866, b: 0.65882355, a: 0}
+  primaryColorEnd: {r: 0.24705884, g: 0.4156863, b: 0.5176471, a: 1}
   noiseScaleStart: 5
   noiseScaleEnd: 30
+  sadnessParticle: {fileID: 3258920988707785952, guid: 125ec9027312e55418cf9a3757c2a6ed,
+    type: 3}

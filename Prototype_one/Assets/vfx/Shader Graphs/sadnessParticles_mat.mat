@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3703315956565885603
+--- !u!114 &-6540180308910327130
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,12 +20,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NewAnger
-  m_Shader: {fileID: -6465566751694194690, guid: f5966b5eb6189fb46934a8b7a66c8511,
+  m_Name: sadnessParticles_mat
+  m_Shader: {fileID: -6465566751694194690, guid: 9075be9670eb4c34685894f38d7ca2a5,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -48,12 +48,27 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CellDensity: 8
-    - _Chaos: 0
+    - Vector1_7d58dda9eb2e44058c16e5f61eb01f39: 2.5
+    - Vector1_964b6c6dd4c542108848d76fb55fe704: 0
+    - _AddPowerFresnel: 20
+    - _AdditionalPower: 2
+    - _ChaosSadness: 0
+    - _FresnelPower: 6
+    - _GlowThickness: 3
+    - _Metallic: 1
+    - _NoiseScale: 5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Thickness: 2
-    - _TimeFactor: 24
+    - _ScrollSpeed: 0.1
+    - _Smoothness: 0
+    - _Speed: 0.63
+    - _time: 1.8
     m_Colors:
-    - _Color: {r: 5.742806, g: 0.19802779, b: 0, a: 1}
+    - Color_67ea1c7258964a2fa53a20a471c2e33b: {r: 0, g: 0.32638204, b: 0.5471698,
+        a: 0}
+    - Color_96ac37e167f345c89868c2fd7dbb2951: {r: 0, g: 0, b: 0, a: 0}
+    - Color_dfa84b722ca243a3a80826c80370bd84: {r: 0, g: 0, b: 0, a: 0}
+    - _GlowColor: {r: 0.16890897, g: 0, b: 0.8679245, a: 0}
+    - _PrimaryColor: {r: 0.03780599, g: 0, b: 0.6603774, a: 0}
+    - _SecondaryColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

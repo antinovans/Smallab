@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 public class BasicMovement : MonoBehaviour
 {
     public float interval;
@@ -25,33 +27,31 @@ public class BasicMovement : MonoBehaviour
     private IEnumerator MoveToNextPos()
     {
         float timer = 0.0f;
-        while (timer < 1.0f)
+        while (timer < 1.5f)
         {
             timer += Time.deltaTime;
             yield return null;
         }
         while (true)
         {
-            FindNextPos();
             Move();
-            yield return new WaitForSeconds(UnityEngine.Random.Range(interval - 0.5f, interval + 0.5f));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(interval - 0.3f, interval + 0.3f));
         }
     }
-    private void FindNextPos()
+    private void Move()
     {
         if (targetPos != null)
         {
             nextPos = targetPos.position;
+            this.GetComponent<Rigidbody>().AddForce((nextPos - transform.position).normalized * gameObject.GetComponent<Rigidbody>().mass * speed, ForceMode.Impulse);
             return;
         }
-        nextPos = new Vector3(UnityEngine.Random.Range(NPCGenerator.minX, NPCGenerator.maxX)
-                , transform.position.y, UnityEngine.Random.Range(NPCGenerator.minX, NPCGenerator.maxX));
-    }
-    private void Move()
-    {
-        if (TestingController.begin)
+        else
         {
-            this.GetComponent<Rigidbody>().AddForce((nextPos - transform.position).normalized * gameObject.GetComponent<Rigidbody>().mass * speed, ForceMode.Impulse);
+            Vector2 dir = Random.insideUnitCircle.normalized;
+            nextPos = new Vector3(dir.x, 0, dir.y);
+            this.GetComponent<Rigidbody>().AddForce(nextPos * gameObject.GetComponent<Rigidbody>().mass * speed, ForceMode.Impulse);
+            return;
         }
     }
 }

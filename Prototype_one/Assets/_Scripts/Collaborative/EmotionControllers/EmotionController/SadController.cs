@@ -37,6 +37,9 @@ public class SadController : MonoBehaviour
     public float noiseScaleStart;
     public float noiseScaleEnd;
 
+    [SerializeField]
+    private GameObject sadnessParticle;
+
     public static int MAX_SIZE = 4;
     //components on the gameobject
     //transform local fields
@@ -74,7 +77,7 @@ public class SadController : MonoBehaviour
 
     private void Update()
     {
-        if (!isDepression && target != null)
+        if (!isDepression && target == null)
         {
             target = GameObject.FindGameObjectWithTag("Anger");
             if (target != null)
@@ -99,12 +102,6 @@ public class SadController : MonoBehaviour
     IEnumerator LerpScale()
     {
         float timer = 0.0f;
-        /*while (timer < 1.0f)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }*/
-        /*timer = 0.0f;*/
         var beginScale = prevSize * defaultScale;
         var endScale = size * defaultScale;
         while (timer < 0.5f)
@@ -161,22 +158,38 @@ public class SadController : MonoBehaviour
         mat.SetColor(colorName, c * intensity);
     }
 
+    private void TurnToDepression()
+    {
+        gameObject.tag = "Depression";
+        GameObject target = GameObject.FindGameObjectWithTag("Gate");
+        if (target != null)
+            GetComponent<BasicMovement>().targetPos = target.transform;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (gameObject.CompareTag("BitterSweet"))
             return;
         if (collision.gameObject.CompareTag("Gate"))
+        {
+            for (int i = 0; i < 6 * size; i++)
+            {
+                var particle = Instantiate(sadnessParticle, transform.position, Quaternion.identity);
+                particle.GetComponent<BezierMovement>().SetTarget(collision.gameObject);
+            }
+            Destroy(gameObject);
             collision.gameObject.GetComponent<GateVFXController>().HandleValue(this.size * this.defaultValue);
+        }
         //sadness collision behavior
         if (!isDepression)
         {
-            if (collision.gameObject.CompareTag("Joy") && isSplitable && !isScalingDown)
+            if (collision.gameObject.CompareTag("Joy") && !isScalingDown)
             {
                 isScalingDown = true;
                 SetSize(this.size / 2);
                 sadnessChangeColor();
             }
-            if (collision.gameObject.CompareTag("Anger") && isSplitable && !isScalingDown)
+            if (collision.gameObject.CompareTag("Anger") && !isScalingDown)
             {
                 isScalingDown = true;
                 isDepression = true;
@@ -184,36 +197,36 @@ public class SadController : MonoBehaviour
                 TurnToDepression();
                 depressionChangeColor();
             }
-            if (collision.gameObject.CompareTag("Depression") && isSplitable)
+            if (collision.gameObject.CompareTag("Depression"))
             {
-                Destroy(collision.gameObject);
+                for (int i = 0; i < 6 * size; i++)
+                {
+                    var particle = Instantiate(sadnessParticle, transform.position, Quaternion.identity);
+                    particle.GetComponent<BezierMovement>().SetTarget(collision.gameObject);
+                }
+                Destroy(gameObject);
             }
         }
         //depression collision behavior
         if (isDepression)
         {
-            if (collision.gameObject.CompareTag("Joy") && isSplitable && !isScalingDown)
+            if (collision.gameObject.CompareTag("Joy") && !isScalingDown)
             {
                 isScalingDown = true;
                 SetSize(this.size - collision.gameObject.GetComponent<JoyController>().size);
+                depressionChangeColor();
             }
             if (collision.gameObject.CompareTag("Anger") && !isScalingDown)
             {
                 SetSize(collision.gameObject.GetComponent<AngerController>().size + this.size);
+                depressionChangeColor();
             }
             if (collision.gameObject.CompareTag("Sadness") && !isScalingDown)
             {
                 SetSize(collision.gameObject.GetComponent<SadController>().size + this.size);
+                depressionChangeColor();
             }
         }
 
-    }
-
-    private void TurnToDepression()
-    {
-        gameObject.tag = "Depression";
-        GameObject target = GameObject.FindGameObjectWithTag("Gate");
-        if (target != null)
-            GetComponent<BasicMovement>().targetPos = target.transform;
     }
 }

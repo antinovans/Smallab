@@ -24,7 +24,8 @@ public class BezierMovement : MonoBehaviour
     {
         isUnlock = false;
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(2 * rb.mass * new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)).normalized,
+        Vector2 unit = Random.insideUnitCircle.normalized;
+        rb.AddForce(0.5f * rb.mass * new Vector3(unit.x, 0, unit.y).normalized,
             ForceMode.Impulse);
         StartCoroutine(Unlock());
     }

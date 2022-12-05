@@ -20,12 +20,19 @@ public class GateVFXController :MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        children = GetComponentsInChildren<Renderer>();
-        Debug.Log(children.Length);
+        children = new Renderer[gameObject.transform.childCount];
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            GameObject child = gameObject.transform.GetChild(i).gameObject;
+            children[i] = child.gameObject.GetComponent<Renderer>();
+        }
         foreach (var r in children)
         {
-            r.material.SetFloat("_Timer", intervalBegin);
-            r.material.SetColor("_EmissionColor", baseColorBegin);
+            if(r.gameObject.GetInstanceID() != gameObject.GetInstanceID())
+            {
+                r.material.SetFloat("_Timer", intervalBegin);
+                r.material.SetColor("_EmissionColor", baseColorBegin);
+            }
         }
         curHealth = maxHealth;
         prevHealth = curHealth;
@@ -35,11 +42,8 @@ public class GateVFXController :MonoBehaviour
     {
         prevHealth = curHealth;
         curHealth = Mathf.Clamp(curHealth + value, 0, maxHealth);
-        Debug.Log("testing int to float " + ((float)curHealth / (float)maxHealth));
         float portion = evaluateCurve.Evaluate(1.0f - ((float)curHealth / (float)maxHealth));
-        Debug.Log("portion is " + portion);
         float targetInterval = (1- portion)*intervalBegin + portion * intervalEnd;
-        Debug.Log("targetInterval is " + targetInterval);
         var targetEmissionColor = Color.Lerp(baseColorBegin, baseColorEnd, portion);
         foreach (var r in children)
         {
@@ -73,29 +77,4 @@ public class GateVFXController :MonoBehaviour
         }
         yield return null;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Joy"))
-        {
-            Destroy(collision.gameObject);
-            return;
-        }
-        if (collision.gameObject.CompareTag("Anger"))
-        {
-            Destroy(collision.gameObject);
-            return;
-        }
-        if (collision.gameObject.CompareTag("Sadness"))
-        {
-            Destroy(collision.gameObject);
-            return;
-        }
-        if (collision.gameObject.CompareTag("Depression"))
-        {
-            Destroy(collision.gameObject);
-            return;
-        }
-    }
-
 }

@@ -33,7 +33,7 @@ public class AngerController : MonoBehaviour
     public static int MAX_SIZE = 4;
     //vfx related
     public static float DEFAULT_TIME_FACTOR = 6.0f;
-    public static float DEFAULT_CELL_DENSITY = 2.0f;
+    public static float DEFAULT_CELL_DENSITY = 0.5f;
     public static float DEFAULT_CHAOS_FACTOR = 0.1f;
     //components on the gameobject
     //transform local fields
@@ -136,8 +136,10 @@ public class AngerController : MonoBehaviour
             return;
 
         if (collision.gameObject.CompareTag("Gate"))
+        {
             collision.gameObject.GetComponent<GateVFXController>().HandleValue(this.size * this.defaultValue);
-
+            Destroy(gameObject);
+        }
         if (collision.gameObject.CompareTag("Joy") && !isScalingDown)
         {
             isScalingDown = true;
@@ -153,6 +155,7 @@ public class AngerController : MonoBehaviour
                 particle.GetComponent<BezierMovement>().SetTarget(collision.gameObject);
             }
             StartCoroutine(LerpScale(0f));
+            Destroy(gameObject);
         }
     }
 }
