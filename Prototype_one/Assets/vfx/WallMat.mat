@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6540180308910327130
+--- !u!114 &-4092415008400085592
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,12 +20,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sadness
-  m_Shader: {fileID: -6465566751694194690, guid: 9075be9670eb4c34685894f38d7ca2a5,
+  m_Name: WallMat
+  m_Shader: {fileID: -6465566751694194690, guid: 015d896108fa3964384fc2a3c9bcbd8b,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -48,27 +48,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_7d58dda9eb2e44058c16e5f61eb01f39: 2.5
-    - Vector1_964b6c6dd4c542108848d76fb55fe704: 0
-    - _AddPowerFresnel: 20
-    - _AdditionalPower: 2
-    - _ChaosSadness: 0
-    - _FresnelPower: 6
-    - _GlowThickness: 3
-    - _Metallic: 1
-    - _NoiseScale: 5
+    - _Intensity: 3
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScrollSpeed: 0.1
-    - _Smoothness: 0
-    - _Speed: 0.63
-    - _time: 1.8
+    - _Timer: 1
     m_Colors:
-    - Color_67ea1c7258964a2fa53a20a471c2e33b: {r: 0, g: 0.32638204, b: 0.5471698,
-        a: 0}
-    - Color_96ac37e167f345c89868c2fd7dbb2951: {r: 0, g: 0, b: 0, a: 0}
-    - Color_dfa84b722ca243a3a80826c80370bd84: {r: 0, g: 0, b: 0, a: 0}
-    - _GlowColor: {r: 0.14509805, g: 0, b: 0.29411766, a: 0}
-    - _PrimaryColor: {r: 0.21568628, g: 0, b: 0.3882353, a: 0}
-    - _SecondaryColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 1, g: 0.023584902, b: 0.023584902, a: 1}
   m_BuildTextureStacks: []

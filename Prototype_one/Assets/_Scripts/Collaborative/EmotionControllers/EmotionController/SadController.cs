@@ -17,44 +17,66 @@ public class SadController : MonoBehaviour
     //can the emotion split
     public bool isSplitable;
     //animation curve used to describe the transition speed
-    [SerializeField]
-    private AnimationCurve scaleTransition;
-
-    [Header("emotion VFX Attributes")]
-    public Color emissionColorBegin;
-    public Color emissionColorEnd;
+    [Header("curves")]
     public AnimationCurve colorGradient;
-    public float intensity;
-    public Color depressionColor;
+    public AnimationCurve scaleTransition;
 
     //rigidbody and transform related
-    public static int DEFAULT_MASS = 2;
-    public static Vector3 DEFAULT_SCALE = new Vector3(0.1f, 0.1f, 0.1f);
-    public static int MAX_SIZE = 8;
-    //vfx related
-    public static float DEFAULT_TIME_FACTOR = 1.0f;
+    [Header("sadness VFX Attributes")]
+    public Color glowColorStart;
+    public Color glowColorEnd;
+    public Color primaryColor;
+
+    /*public static float DEFAULT_TIME_FACTOR = 1.0f;
     public static float DEFAULT_CELL_DENSITY = 1.0f;
-    public static float DEFAULT_CHAOS_FACTOR = 0f;
+    public static float DEFAULT_CHAOS_FACTOR = 0f;*/
+    [Header("depression VFX Attributes")]
+    public Color glowColor;
+    public Color primaryColorStart;
+    public Color primaryColorEnd;
+    public float noiseScaleStart;
+    public float noiseScaleEnd;
+
+    public static int MAX_SIZE = 4;
     //components on the gameobject
     //transform local fields
     private bool isScalingDown = false;
-    //vfx local fields
-    private Color curColor;
     private Material mat;
     //sad controller exclusive
     private bool isDepression = false;
+
+    private GameObject target = null;
     // Start is called before the first frame update
     private void Start()
     {
-        UpdateTransform();
-        initializeVFXFields();
+        initializeSadness();
+    }
+
+    private void initializeSadness()
+    {
+        isSplitable = size > 1 ? true : false;
+        if (!isSplitable)
+        {
+            gameObject.tag = "BitterSweet";
+            this.defaultValue = 1;
+        }
+        gameObject.GetComponent<Rigidbody>().mass = size * defaultMass;
+        transform.localScale = size * defaultScale;
+
+        mat = gameObject.GetComponent<Renderer>().material;
+        var curGlowColor = Color.Lerp(glowColorStart, glowColorEnd, Mathf.Clamp01(colorGradient.Evaluate((float)this.size / (float)MAX_SIZE)));
+        mat.SetColor("_GlowColor", curGlowColor);
+        mat.SetColor("_PrimaryColor", primaryColor);
+        mat.SetFloat("_NoiseScale", 20f);
+
+
     }
 
     private void Update()
     {
-        if (!isDepression)
+        if (!isDepression && target != null)
         {
-            GameObject target = GameObject.FindGameObjectWithTag("Anger");
+            target = GameObject.FindGameObjectWithTag("Anger");
             if (target != null)
                 GetComponent<BasicMovement>().targetPos = target.transform;
         }
@@ -65,10 +87,6 @@ public class SadController : MonoBehaviour
     {
         this.prevSize = this.size;
         this.size = size;
-        UpdateTransform();
-    }
-    private void UpdateTransform()
-    {
         isSplitable = size > 1 ? true : false;
         if (!isSplitable)
         {
@@ -100,54 +118,71 @@ public class SadController : MonoBehaviour
         isScalingDown = false;
     }
 
-    //vfx related
-    private void initializeVFXFields()
+    public void sadnessChangeColor()
     {
-        mat = gameObject.GetComponent<Renderer>().material;
-        curColor = emissionColorBegin;
-        ChangeColor();
+        var curGlowColor = Color.Lerp(glowColorStart, glowColorEnd, Mathf.Clamp01(colorGradient.Evaluate((float)this.size / (float)MAX_SIZE)));
+        StartCoroutine(LerpColor("_GlowColor", curGlowColor, 1f, 1f));
     }
-    public void ChangeColor()
+    public void depressionChangeColor()
     {
-        /*curColor = Mathf.Floor(colorGradient.Evaluate(this.size / MAX_SIZE) * gradientNum) * E_GRADIENT + emissionColorBegin;*/
-        curColor = Color.Lerp(emissionColorBegin, emissionColorEnd, colorGradient.Evaluate((float)this.size / (float)MAX_SIZE));
-        /*mat.SetColor("_Color", curEColor * 50f);*/
-        StartCoroutine(LerpColor(curColor, 1f, intensity));
-        var curSpeed = mat.GetFloat("_TimeFactor");
-        mat.SetFloat("_TimeFactor", DEFAULT_TIME_FACTOR * this.size);
-        mat.SetFloat("_CellDensity", DEFAULT_CELL_DENSITY * this.size);
-        mat.SetFloat("_Chaos", DEFAULT_CHAOS_FACTOR * this.size);
+        StartCoroutine(LerpColor("_GlowColor", glowColor, 1f, 1f));
+        var curPrimaryColor = Color.Lerp(primaryColorStart, primaryColorEnd, Mathf.Clamp01(colorGradient.Evaluate((float)this.size / (float)MAX_SIZE)));
+        StartCoroutine(LerpColor("_PrimaryColor", curPrimaryColor, 1f, 1f));
+        float portion = Mathf.Clamp01(colorGradient.Evaluate((float)this.size / (float)MAX_SIZE));
+        float noiseScale = noiseScaleStart + portion*(noiseScaleEnd - noiseScaleStart);
+        Debug.Log("NoiseSacle: " + noiseScale);
+        StartCoroutine(LerpFloat("_NoiseScale", mat.GetFloat("_NoiseScale"), noiseScale, 1.0f));
+
     }
-    IEnumerator LerpColor(Color c, float time, float intensity)
+
+    IEnumerator LerpFloat(string attributeName, float begin, float end, float time)
     {
-        var initColor = mat.GetColor("_Color");
+        float timer = 0.0f;
+        while (timer < time)
+        {
+            timer += Time.deltaTime;
+            float portion = colorGradient.Evaluate(timer);
+            mat.SetFloat(attributeName, (1 - portion) * begin + portion * end);
+            yield return null;
+        }
+        mat.SetFloat(attributeName, end);
+    }
+    IEnumerator LerpColor(string colorName, Color c, float time, float intensity)
+    {
+        var initColor = mat.GetColor(colorName);
         float timer = 0.0f;
         while (timer <= time)
         {
             var tempColor = Color.Lerp(initColor, c, timer / time);
-            mat.SetColor("_Color", tempColor * intensity);
+            mat.SetColor(colorName, tempColor * intensity);
             timer += Time.deltaTime;
             yield return null;
         }
-        mat.SetColor("_Color", c * intensity);
+        mat.SetColor(colorName, c * intensity);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (gameObject.CompareTag("BitterSweet"))
+            return;
+        if (collision.gameObject.CompareTag("Gate"))
+            collision.gameObject.GetComponent<GateVFXController>().HandleValue(this.size * this.defaultValue);
         //sadness collision behavior
-        if(!isDepression)
+        if (!isDepression)
         {
             if (collision.gameObject.CompareTag("Joy") && isSplitable && !isScalingDown)
             {
                 isScalingDown = true;
                 SetSize(this.size / 2);
-                ChangeColor();
+                sadnessChangeColor();
             }
-            if (collision.gameObject.CompareTag("Anger") && isSplitable)
+            if (collision.gameObject.CompareTag("Anger") && isSplitable && !isScalingDown)
             {
+                isScalingDown = true;
                 isDepression = true;
                 SetSize(collision.gameObject.GetComponent<AngerController>().size + this.size);
                 TurnToDepression();
+                depressionChangeColor();
             }
             if (collision.gameObject.CompareTag("Depression") && isSplitable)
             {
@@ -180,6 +215,5 @@ public class SadController : MonoBehaviour
         GameObject target = GameObject.FindGameObjectWithTag("Gate");
         if (target != null)
             GetComponent<BasicMovement>().targetPos = target.transform;
-        StartCoroutine(LerpColor(depressionColor, 1f, intensity));
     }
 }

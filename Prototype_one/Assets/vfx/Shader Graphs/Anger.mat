@@ -37,14 +37,12 @@ Material:
     m_Floats:
     - _CellDensity: 6.54
     - _Chaos: -0.4
-    - _QueueControl: 0
-    - _QueueOffset: 0
     - _Thickness: 1.26
     - _TimeFactor: 4.49
     m_Colors:
     - _Color: {r: 14.754423, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &4815978320699673307
+--- !u!114 &2138403450237119123
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -132,6 +132,12 @@ public class AngerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if (gameObject.CompareTag("BitterSweet"))
+            return;
+
+        if (collision.gameObject.CompareTag("Gate"))
+            collision.gameObject.GetComponent<GateVFXController>().HandleValue(this.size * this.defaultValue);
+
         if (collision.gameObject.CompareTag("Joy") && !isScalingDown)
         {
             isScalingDown = true;

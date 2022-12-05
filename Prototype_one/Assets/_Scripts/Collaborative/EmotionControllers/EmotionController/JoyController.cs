@@ -31,6 +31,8 @@ public class JoyController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Gate"))
+            collision.gameObject.GetComponent<GateVFXController>().HandleValue(this.size * this.defaultValue);
         if (collision.gameObject.CompareTag("Anger"))
         {
             SoundManager.instance.PlaySound("Positive_Collision", false);
