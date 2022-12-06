@@ -96,6 +96,7 @@ public class Lotus : MonoBehaviour
         if (!isRotating)
         {
             isRotating = true;
+            EffectManager.instance.InstantiateStars(new Vector3(transform.position.x, 0.5f, transform.position.z));
             if (blossomAC != null)
                 blossomAC.SetBool("shouldBlossom", true);
             int i = UnityEngine.Random.Range(1, 5);

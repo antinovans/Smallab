@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Anger
-  m_Shader: {fileID: -6465566751694194690, guid: 55797c2c5740db54cb7653dee755cf92,
+  m_Name: Trail
+  m_Shader: {fileID: -6465566751694194690, guid: a1de46a6ec650574fb0d91ed91573ef2,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -35,16 +35,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CellDensity: 6.54
-    - _Chaos: -0.4
+    - _CellDensity: 3.91
+    - _Chaos: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Thickness: 1.26
-    - _TimeFactor: 4.49
+    - _Thickness: -1.9
+    - _TimeFactor: 6.66
     m_Colors:
-    - _Color: {r: 14.754423, g: 0, b: 0, a: 1}
+    - _Color: {r: 0, g: 2.0437264, b: 3.5801184, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &2138403450237119123
+--- !u!114 &8118854664000070351
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
