@@ -21,10 +21,10 @@ public class CurvedMovement : MonoBehaviour
 
     private void Update()
     {
-        if (TestingController.begin)
+        /*if (TestingController.begin)
         {
             Move();
-        }
+        }*/
     }
 
     /*    private void Move()

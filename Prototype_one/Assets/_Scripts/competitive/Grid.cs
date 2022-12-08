@@ -86,6 +86,7 @@ public class Grid
         {
             right.lower = null;
             temp.higher = null;
+            SoundManager.instance.PlaySound("block_disappear", false);
         }
         List<Cube> cubes = new List<Cube>();
         while (temp != null)
@@ -98,6 +99,7 @@ public class Grid
                 prevGrid.higher = null;
             temp.SetPlayer(Player.PLAYER_NULL);
             temp.SetOccupied(true);
+            SoundManager.instance.PlaySound("block_disappear", false);
             temp = prevGrid;
         }
         BoardManager.instance.HandleCubesColor(cubes, Cube.NULL, 0.1f);
@@ -136,6 +138,7 @@ public class Grid
             highest.lower = null;
             cubes.Add(highest.GetCube());
             highest.SetPlayer(Player.PLAYER_NULL);
+            SoundManager.instance.PlaySound("block_disappear", false);
             highest.SetOccupied(true);
             /*highest.GetCube().SetColor(Cube.NULL);*/
             highest = left;
