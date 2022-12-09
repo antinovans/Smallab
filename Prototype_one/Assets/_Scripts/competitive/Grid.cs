@@ -82,11 +82,11 @@ public class Grid
     {
         Grid temp = this;
         Grid right = temp.higher;
+        int times = 0;
         if(right != null)
         {
             right.lower = null;
             temp.higher = null;
-            SoundManager.instance.PlaySound("block_disappear", false);
         }
         List<Cube> cubes = new List<Cube>();
         while (temp != null)
@@ -98,10 +98,11 @@ public class Grid
             if(prevGrid != null)
                 prevGrid.higher = null;
             temp.SetPlayer(Player.PLAYER_NULL);
+            times++;
             temp.SetOccupied(true);
-            SoundManager.instance.PlaySound("block_disappear", false);
             temp = prevGrid;
         }
+        SoundManager.instance.PlaySoundOneShotMultipleTimes("block_disappear", times);
         BoardManager.instance.HandleCubesColor(cubes, Cube.NULL, 0.1f);
     }
     public void DelinkHigherGrids()
@@ -130,6 +131,7 @@ public class Grid
             highest = highest.higher;
         }
         /*highest.SetAllLowerGridColor(Cube.NULL, 0.5f);*/
+        int times = 0;
         while(highest != null)
         {
             Grid left = highest.lower;
@@ -138,11 +140,12 @@ public class Grid
             highest.lower = null;
             cubes.Add(highest.GetCube());
             highest.SetPlayer(Player.PLAYER_NULL);
-            SoundManager.instance.PlaySound("block_disappear", false);
+            times++;
             highest.SetOccupied(true);
             /*highest.GetCube().SetColor(Cube.NULL);*/
             highest = left;
         }
+        SoundManager.instance.PlaySoundOneShotMultipleTimes("block_disappear", times);
         BoardManager.instance.HandleCubesColor(cubes, Cube.NULL, 0.1f);
     }
     public Grid GetHighest()
@@ -198,6 +201,7 @@ public class Grid
             /*grid.canOccupy = false;*/
         }
         grid.canOccupy = false;
+        SoundManager.instance.PlaySound("occupy_block", false);
         return grid;
     }
     public void Reset()

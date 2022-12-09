@@ -101,7 +101,7 @@ public class Lotus : MonoBehaviour
                 blossomAC.SetBool("shouldBlossom", true);
             int i = UnityEngine.Random.Range(1, 5);
             string soundName = "lotus" + i;
-            FindObjectOfType<SoundManager>().PlaySound(soundName, false);
+            SoundManager.instance.PlaySound(soundName, false);
 
             StartCoroutine(Rotate(2f, 360f));
         }

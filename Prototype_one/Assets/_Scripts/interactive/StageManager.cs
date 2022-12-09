@@ -63,7 +63,7 @@ public class StageManager : MonoBehaviour
             yield return null;
         }
         sceneLight.intensity = endIntensity;
-        FindObjectOfType<SoundManager>().PlaySound("Background", true);
+        SoundManager.instance.PlaySound("Background", true);
         player1Pos = player1.transform.position;
         player2Pos = player2.transform.position;
         player2Pos = player3.transform.position;

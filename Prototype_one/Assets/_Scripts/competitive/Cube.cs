@@ -44,6 +44,11 @@ public class Cube : MonoBehaviour
         GridPlayer player = other.GetComponent<GridPlayer>();
         if(player != null)
         {
+            if(player.occupyingGrid != null)
+            {
+                player.occupyingGrid.GetCube().ResetCube();
+            }
+            player.occupyingGrid = this.parent;
             //change data inside grid, gridplayer
             logicCo = CountDown(player);
             StartCoroutine(logicCo);
@@ -69,16 +74,20 @@ public class Cube : MonoBehaviour
             //leaving other's current grid shouldn't cancel out other's effect
             if (this.parent.GetPlayer() != Player.PLAYER_NULL && player.GetId() != this.parent.GetPlayer())
                 return;
-            //stop all the coroutines in OnTriggerEnter()
-            StopAllCoroutines();
-            //move cube back to original position
-            translateCo = MoveDown();
-            StartCoroutine(translateCo);
-            //set cube color to not shiny
-            colorCo = LerpColor(initColor, 0.2f, 1f);
-            StartCoroutine(colorCo);
+            ResetCube();
         }
         LoadingUIManager.instance.StopLoadingUI(key);
+    }
+    public void ResetCube()
+    {
+        //stop all the coroutines in OnTriggerEnter()
+        StopAllCoroutines();
+        //move cube back to original position
+        translateCo = MoveDown();
+        StartCoroutine(translateCo);
+        //set cube color to not shiny
+        colorCo = LerpColor(initColor, 0.2f, 1f);
+        StartCoroutine(colorCo);
     }
     IEnumerator CountDown(GridPlayer player)
     {
@@ -89,6 +98,7 @@ public class Cube : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+        player.occupyingGrid = null;
         HandleGridUpdate(player);
         translateCo = MoveDown();
         StartCoroutine(translateCo);

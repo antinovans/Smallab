@@ -9,11 +9,13 @@ public class GridPlayer : MonoBehaviour
     private Player id;
     private Grid lastGrid;
     public bool isAdding;
+    public Grid occupyingGrid;
     // Start is called before the first frame update
     void Start()
     {
         lastGrid = null;
         isAdding = false;
+        occupyingGrid = null;
     }
 
     public Player GetId()

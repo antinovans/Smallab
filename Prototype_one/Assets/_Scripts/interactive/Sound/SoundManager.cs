@@ -38,4 +38,19 @@ public class SoundManager : MonoBehaviour
         target.source.loop = shouldLoop;
         target.source.Play();
     }
+    public void PlaySoundOneShotMultipleTimes(string name, int times)
+    {
+        Sound target = System.Array.Find(sounds, sound => sound.name == name);
+        /*target.source.PlayOneShot(target.clip);*/
+        StartCoroutine(PlayOneShot(target, times));
+    }
+    IEnumerator PlayOneShot(Sound s, int times)
+    {
+        while (times != 0)
+        {
+            s.source.PlayOneShot(s.clip);
+            yield return new WaitForSeconds(0.1f);
+            times--;
+        }
+    }
 }

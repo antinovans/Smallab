@@ -38,8 +38,6 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.instance.PlaySound("Background", true);
         videoPlayer = GetComponent<VideoPlayer>();
-        /*videoPlayer.clip = tutorial;
-        videoPlayer.Play();*/
     }
 
     // Update is called once per frame
