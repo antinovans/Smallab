@@ -25,8 +25,8 @@ public class TestingController : MonoBehaviour
     }
     private void Start()
     {
-        SoundManager.instance.PlaySound("Background", true);
         videoPlayer = GetComponent<VideoPlayer>();
+        StartCoroutine(PlayVideo(tutorial));
     }
     // Start is called before the first frame update
     private void Update()
@@ -44,6 +44,11 @@ public class TestingController : MonoBehaviour
         videoPlayer.Play();
         while (videoPlayer.isPlaying)
         {
+            yield return null;
+        }
+        while (videoPlayer.targetCameraAlpha > 0)
+        {
+            videoPlayer.targetCameraAlpha -= Time.deltaTime;
             yield return null;
         }
         videoPlayer.targetCameraAlpha = 0.0f;

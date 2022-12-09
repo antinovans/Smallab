@@ -37,7 +37,6 @@ public class EffectManager : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(GetPlayerDistances());
         if(GetPlayerDistances() <=0.26f && !isFirework)
         {
             isFirework = true;
