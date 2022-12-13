@@ -62,22 +62,4 @@ public class Spawner : MonoBehaviour
             yield return null;
         }
     }
-
-    IEnumerator Translate(GameObject obj, float duration, Vector3 targetPos)
-    {
-        Vector3 startPos = obj.transform.position;
-        Vector3 endPos = targetPos;
-        float t = 0.0f;
-        while (t < duration)
-        {
-            t += Time.deltaTime;
-            Vector3 newPos = Vector3.Lerp(startPos, endPos, t / duration);
-            obj.transform.position = newPos;
-            yield return null;
-        }
-    }
-
-
-
-
 }
